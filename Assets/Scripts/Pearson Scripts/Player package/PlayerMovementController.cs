@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovementController : MonoBehaviour
 {
-    [SerializeField] float speed, acceleration;
+    [SerializeField] float speed;
     public float Horz;
     Rigidbody2D rb;
     // Start is called before the first frame update
