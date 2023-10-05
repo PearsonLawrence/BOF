@@ -17,14 +17,10 @@ public class CameraController : MonoBehaviour
         cam = this.GetComponent<Camera>();   
     }
 
-    private void Update()
-    {
-        
-    }
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         toLocation = new Vector3(Focus.transform.position.x, Focus.transform.position.y, Focus.transform.position.z - 20);
-        transform.position = Vector3.Lerp(transform.position, toLocation, LagSpeed) ;
+        transform.position = Vector3.Lerp(transform.position, toLocation, LagSpeed * Time.deltaTime) ;
     }
 }

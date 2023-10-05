@@ -15,13 +15,10 @@ public class PlayerMovementController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
-    {
-        
-    }
     // Update is called once per frame
     void FixedUpdate()
     {
+        transform.forward = new Vector2(transform.forward.x, 0);
         Horz = Input.GetAxis("Horizontal");
         isCrouching = (Input.GetKey(KeyCode.S));
         if (isCrouching && transform.localScale != new Vector3(.5f,.25f, 1))
@@ -34,8 +31,8 @@ public class PlayerMovementController : MonoBehaviour
             transform.localScale = new Vector3(.5f, .5f, 1);
         }
 
-        rb.velocity = new Vector2(Horz * speed, rb.velocity.y);
-        transform.forward = new Vector2(transform.forward.x, 0);
+        rb.velocity = new Vector2(Horz * speed * Time.unscaledDeltaTime, rb.velocity.y);
+        
 
     }
 }

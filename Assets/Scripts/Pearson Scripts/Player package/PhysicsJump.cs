@@ -34,7 +34,7 @@ public class PhysicsJump : MonoBehaviour
             }
             else
             {
-                rb.gravityScale = fallGravityScale;
+                rb.gravityScale = fallGravityScale * Time.timeScale;
             }
         
             
@@ -42,7 +42,7 @@ public class PhysicsJump : MonoBehaviour
 
         if(isJumping)
         {
-            buttonPressTime += Time.deltaTime;
+            buttonPressTime += Time.unscaledDeltaTime;
 
             if (buttonPressTime < buttonPressWindow)
             {
