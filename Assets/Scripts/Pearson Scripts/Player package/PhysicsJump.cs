@@ -23,7 +23,7 @@ public class PhysicsJump : MonoBehaviour
     public void Jump()
     {
         rb.gravityScale = gravityScale;
-        float jumpForce = Mathf.Sqrt(jumpHeight * ((Input.GetKey(KeyCode.Space)) ? 2 : 1) * (Physics2D.gravity.y * rb.gravityScale) * -2) * rb.mass;
+        float jumpForce = Mathf.Sqrt(jumpHeight  * (Physics2D.gravity.y * rb.gravityScale) * -2) * rb.mass;
         rb.AddRelativeForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
         if (rb.velocity.y > 0)
         {
@@ -35,14 +35,14 @@ public class PhysicsJump : MonoBehaviour
         }
     }
 
-    public void gravityChange(float pTime, float pWindow)
+    public void gravityChange(float pTime, float pWindow, bool grounded)
     {
         if (pTime < pWindow)
         {
             //cancel the jump
             rb.gravityScale = fallGravityScale;
         }
-        if (rb.velocity.y < 0)
+        if (grounded && isJumping)
         {
             rb.gravityScale = fallGravityScale;
             isJumping = false;

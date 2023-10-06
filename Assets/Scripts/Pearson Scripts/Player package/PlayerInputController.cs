@@ -48,7 +48,7 @@ public class PlayerInputController : MonoBehaviour
             timeController.fixedTime = Mathf.MoveTowards(timeController.fixedTime, .02f, Time.unscaledDeltaTime * speed);
             timeController.ChangeTimeScale();
             playerMovement.moveSpeed(speedType);
-            Debug.Log("test");
+         //   Debug.Log("test");
         }
 
         
@@ -62,7 +62,7 @@ public class PlayerInputController : MonoBehaviour
             playerMovement.isCrouching = false;
         }
         
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) && playerMovement.isGrounded)
         {
             physJump.Jump();
         }
@@ -71,7 +71,7 @@ public class PlayerInputController : MonoBehaviour
         {
             buttonPressTime += Time.unscaledDeltaTime;
 
-            physJump.gravityChange(buttonPressTime, buttonPressWindow);
+            physJump.gravityChange(buttonPressTime, buttonPressWindow, playerMovement.isGrounded);
         }
 
     }

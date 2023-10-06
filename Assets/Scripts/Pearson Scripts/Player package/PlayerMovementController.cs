@@ -34,13 +34,13 @@ public class PlayerMovementController : MonoBehaviour
 
     Vector2 rayFeetPos, rayLeftPos, rayRightPos, rayUpPos;
 
-       
+    Vector3 StartScale;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         speed = regSpeed;
-
+        StartScale = transform.localScale;
     }
     public void moveSpeed(string type)
     {
@@ -62,38 +62,32 @@ public class PlayerMovementController : MonoBehaviour
     {
 
 
-        rayFeetPos = new Vector2(transform.position.x, transform.position.y - (transform.localScale.y + .05f));
-        rayUpPos = new Vector2(transform.position.x, transform.position.y + (transform.localScale.y + .05f));
-        rayLeftPos = new Vector2(transform.position.x - (transform.localScale.x + .05f), transform.position.y);
-        rayRightPos = new Vector2(transform.position.x + (transform.localScale.x + .05f), transform.position.y);
-        rayFeet = new Ray(rayFeetPos, -transform.up);
-        rayUp = new Ray(rayUpPos, transform.up);
-        rayDown = new Ray(transform.position, -Vector2.up);
-        rayLeft = new Ray(rayLeftPos, -transform.right);
-        rayRight = new Ray(rayRightPos, transform.right);
+        rayFeetPos = new Vector2(transform.position.x, transform.position.y - (StartScale.y + .1f));
+        rayUpPos = new Vector2(transform.position.x, transform.position.y + (StartScale.y + .1f));
+        rayLeftPos = new Vector2(transform.position.x - (StartScale.x + .1f), transform.position.y);
+        rayRightPos = new Vector2(transform.position.x + (StartScale.x + .1f), transform.position.y);
+        
+        //rayFeet = new Ray(rayFeetPos, -transform.up);
+        //rayUp = new Ray(rayUpPos, transform.up);
+        //rayDown = new Ray(transform.position, -Vector2.up);
+        //rayLeft = new Ray(rayLeftPos, -transform.right);
+        //rayRight = new Ray(rayRightPos, transform.right);
 
         //RaycastHit2D hit1 = Physics2D.Raycast(transform.position, -transform.up, 1);
-        RaycastHit2D hit2 = Physics2D.Raycast(rayFeetPos, -Vector2.up, .25f);
-        RaycastHit2D hit3 = Physics2D.Raycast(rayUpPos, Vector2.up, .25f);
-        RaycastHit2D hit4 = Physics2D.Raycast(rayLeftPos, -Vector2.right, .1f);
-        RaycastHit2D hit5 = Physics2D.Raycast(rayRightPos, Vector2.right, .1f);
-        Debug.DrawRay(rayFeetPos, -Vector2.up * .25f, Color.red);
-        Debug.DrawRay(rayUpPos, Vector2.up * .25f, Color.red);
-        Debug.DrawRay(rayLeftPos, -Vector2.right * .1f, Color.red);
-        Debug.DrawRay(rayRightPos, Vector2.right * .1f, Color.red);
-        //if (hit1)
-        //{
-        //    if (hit1.distance <= 2f)
-        //    {
-        //        Debug.DrawLine(rayFeetPos, hit1.point, Color.green);
-        //        hit = hit1;
-        //        return true;
-        //    }
-        //}
+        RaycastHit2D hit2 = Physics2D.Raycast(rayFeetPos, -Vector2.up, 1);
+        RaycastHit2D hit3 = Physics2D.Raycast(rayUpPos, Vector2.up, 1);
+        RaycastHit2D hit4 = Physics2D.Raycast(rayLeftPos, -Vector2.right, 1);
+        RaycastHit2D hit5 = Physics2D.Raycast(rayRightPos, Vector2.right, 1);
+        Debug.DrawRay(rayFeetPos, -Vector2.up * .2f, Color.red);
+        Debug.DrawRay(rayUpPos, Vector2.up * .2f, Color.red);
+        Debug.DrawRay(rayLeftPos, -Vector2.right * .2f, Color.red);
+        Debug.DrawRay(rayRightPos, Vector2.right * .2f, Color.red);
+        
         if (hit2)
         {
-            if (hit2.distance <= .25f)
+            if (hit2.distance < .5f)
             {
+
                 //Debug.DrawLine(transform.position, hit2.point, Color.green);
 
                 hit = hit2;
@@ -102,16 +96,17 @@ public class PlayerMovementController : MonoBehaviour
         }
         if (hit3)
         {
-            if (hit3.distance <= .25f)
+            if (hit3.distance < .5f)
             {
-               // Debug.DrawLine(transform.position, hit3.point, Color.green);
+                Debug.Log("cieling");
+                // Debug.DrawLine(transform.position, hit3.point, Color.green);
                 hit = hit3;
                 return true;
             }
         }
         if (hit4)
         {
-            if (hit4.distance <= .1f)
+            if (hit4.distance < .5f)
             {
                 //Debug.DrawLine(transform.position, hit4.point, Color.green);
                 hit = hit4;
@@ -120,7 +115,7 @@ public class PlayerMovementController : MonoBehaviour
         }
         if (hit5)
         {
-            if (hit5.distance <= .1f)
+            if (hit5.distance < .5f)
             {
                 //Debug.DrawLine(transform.position, hit5.point, Color.green);
                 hit = hit5;
@@ -134,13 +129,44 @@ public class PlayerMovementController : MonoBehaviour
     public void GroundMovement(RaycastHit2D hit)
     {
         transform.up = Vector2.Lerp(transform.up, hit.normal, 25 * Time.unscaledDeltaTime);
-        rb.velocity = new Vector2(Horz * speed, rb.velocity.y);
+        
+        if(Horz > 0)
+        {
+            transform.localScale = new Vector3(.5f, transform.localScale.y, transform.localScale.z);
+        }
+        else if(Horz < 0)
+        {
+            transform.localScale = new Vector3(-.5f, transform.localScale.y, transform.localScale.z);
+
+        }
+        if(Horz != 0)
+            rb.velocity = new Vector2(Horz * speed, rb.velocity.y);
+        
+
+
+
     }
     public void AirMovement()
     {
-        Vector2 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.up = Vector3.Slerp(transform.up, dir, Time.unscaledDeltaTime * 10);
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            Vector2 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            transform.up = Vector3.Slerp(transform.up, dir, Time.unscaledDeltaTime * 5);
+        }
+        else
+        {
+            if (Horz > 0)
+            {
+                transform.localScale = new Vector3(.5f, transform.localScale.y, transform.localScale.z);
+            }
+            else if (Horz < 0)
+            {
+                transform.localScale = new Vector3(-.5f, transform.localScale.y, transform.localScale.z);
+
+            }
+        }
+       
     }
     public void MovementStateMachine(MovementStates state)
     {
@@ -159,7 +185,11 @@ public class PlayerMovementController : MonoBehaviour
                 break;
         }
     }
- 
+
+    public void Update()
+    {
+        
+    }
 
     // Update is called once per frame
     void FixedUpdate()
