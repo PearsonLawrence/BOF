@@ -11,8 +11,6 @@ public class PhysicsJump : MonoBehaviour
     [SerializeField] float fallGravityScale = 15;
 
     public bool isJumping;
-    float buttonPressTime;
-    float buttonPressWindow;
     Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
@@ -21,39 +19,33 @@ public class PhysicsJump : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+
+    public void Jump()
     {
-        if(Input.GetKeyDown(KeyCode.W))
+        rb.gravityScale = gravityScale;
+        float jumpForce = Mathf.Sqrt(jumpHeight * ((Input.GetKey(KeyCode.Space)) ? 2 : 1) * (Physics2D.gravity.y * rb.gravityScale) * -2) * rb.mass;
+        rb.AddRelativeForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+        if (rb.velocity.y > 0)
         {
             rb.gravityScale = gravityScale;
-            float jumpForce = Mathf.Sqrt(jumpHeight * (Physics2D.gravity.y * rb.gravityScale) * -2) * rb.mass;
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            if (rb.velocity.y > 0)
-            {
-                rb.gravityScale = gravityScale;
-            }
-            else
-            {
-                rb.gravityScale = fallGravityScale * Time.timeScale;
-            }
-        
-            
         }
-
-        if(isJumping)
+        else
         {
-            buttonPressTime += Time.unscaledDeltaTime;
+            rb.gravityScale = fallGravityScale * Time.timeScale;
+        }
+    }
 
-            if (buttonPressTime < buttonPressWindow)
-            {
-                //cancel the jump
-                rb.gravityScale = fallGravityScale;
-            }
-            if(rb.velocity.y < 0)
-            {
-                rb.gravityScale = fallGravityScale;
-                isJumping = false;
-            }
+    public void gravityChange(float pTime, float pWindow)
+    {
+        if (pTime < pWindow)
+        {
+            //cancel the jump
+            rb.gravityScale = fallGravityScale;
+        }
+        if (rb.velocity.y < 0)
+        {
+            rb.gravityScale = fallGravityScale;
+            isJumping = false;
         }
     }
 

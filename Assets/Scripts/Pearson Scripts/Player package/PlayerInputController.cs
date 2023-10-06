@@ -10,12 +10,26 @@ public class PlayerInputController : MonoBehaviour
     [SerializeField]
     private TimeController timeController;
 
-    public float minSlow = .1f;
+    [SerializeField]
+    private PlayerMovementController playerMovement;
+    [SerializeField]
+    private PhysicsJump physJump;
+
+    public float minSlow = .01f;
     public float speed = 100;
+
+    private float goalSlow;
+
+    float buttonPressTime;
+    float buttonPressWindow;
+
+    string speedType;
     // Start is called before the first frame update
     void Start()
     {
         timeController = this.GetComponent<TimeController>();
+        playerMovement = this.GetComponent<PlayerMovementController>();
+        physJump = this.GetComponent<PhysicsJump>();
     }
 
 
@@ -23,18 +37,42 @@ public class PlayerInputController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.Space))
+       
+        goalSlow = (Input.GetKey(KeyCode.Space)) ? minSlow : 1;
+        speedType = (Input.GetKey(KeyCode.Space)) ? "slow" : "reg";
+
+
+        if (timeController.currentScale != goalSlow)
         {
-            timeController.currentScale = Mathf.Lerp(timeController.currentScale, minSlow, Time.unscaledDeltaTime * speed);
-            timeController.fixedTime = Mathf.Lerp(timeController.fixedTime, minSlow, Time.unscaledDeltaTime * speed);
+            timeController.currentScale = Mathf.MoveTowards(timeController.currentScale, goalSlow, Time.unscaledDeltaTime * speed);
+            timeController.fixedTime = Mathf.MoveTowards(timeController.fixedTime, .02f, Time.unscaledDeltaTime * speed);
+            timeController.ChangeTimeScale();
+            playerMovement.moveSpeed(speedType);
+            Debug.Log("test");
+        }
+
+        
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            playerMovement.isCrouching = true;
         }
         else
         {
-            timeController.currentScale = Mathf.Lerp(timeController.currentScale, 1, Time.unscaledDeltaTime * speed);
-            timeController.fixedTime = Mathf.Lerp(timeController.fixedTime, .02f, Time.unscaledDeltaTime * speed);
+            playerMovement.isCrouching = false;
         }
-        Debug.Log(timeController.currentScale);
-        if(timeController.currentScale > .5f && timeController.currentScale < 1)
-            timeController.ChangeTimeScale();
+        
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            physJump.Jump();
+        }
+
+        if (physJump.isJumping)
+        {
+            buttonPressTime += Time.unscaledDeltaTime;
+
+            physJump.gravityChange(buttonPressTime, buttonPressWindow);
+        }
+
     }
 }
