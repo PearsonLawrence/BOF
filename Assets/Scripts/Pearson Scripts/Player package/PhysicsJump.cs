@@ -27,7 +27,7 @@ public class PhysicsJump : MonoBehaviour
         rb.AddRelativeForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
         if (rb.velocity.y > 0)
         {
-            rb.gravityScale = gravityScale;
+            rb.gravityScale = gravityScale * Time.timeScale;
         }
         else
         {

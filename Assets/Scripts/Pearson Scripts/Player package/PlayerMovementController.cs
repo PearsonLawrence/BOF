@@ -66,18 +66,12 @@ public class PlayerMovementController : MonoBehaviour
         rayUpPos = new Vector2(transform.position.x, transform.position.y + (StartScale.y + .1f));
         rayLeftPos = new Vector2(transform.position.x - (StartScale.x + .1f), transform.position.y);
         rayRightPos = new Vector2(transform.position.x + (StartScale.x + .1f), transform.position.y);
-        
-        //rayFeet = new Ray(rayFeetPos, -transform.up);
-        //rayUp = new Ray(rayUpPos, transform.up);
-        //rayDown = new Ray(transform.position, -Vector2.up);
-        //rayLeft = new Ray(rayLeftPos, -transform.right);
-        //rayRight = new Ray(rayRightPos, transform.right);
-
-        //RaycastHit2D hit1 = Physics2D.Raycast(transform.position, -transform.up, 1);
+   
         RaycastHit2D hit2 = Physics2D.Raycast(rayFeetPos, -Vector2.up, 1);
         RaycastHit2D hit3 = Physics2D.Raycast(rayUpPos, Vector2.up, 1);
         RaycastHit2D hit4 = Physics2D.Raycast(rayLeftPos, -Vector2.right, 1);
         RaycastHit2D hit5 = Physics2D.Raycast(rayRightPos, Vector2.right, 1);
+
         Debug.DrawRay(rayFeetPos, -Vector2.up * .2f, Color.red);
         Debug.DrawRay(rayUpPos, Vector2.up * .2f, Color.red);
         Debug.DrawRay(rayLeftPos, -Vector2.right * .2f, Color.red);
@@ -87,38 +81,31 @@ public class PlayerMovementController : MonoBehaviour
         {
             if (hit2.distance < .5f)
             {
-
-                //Debug.DrawLine(transform.position, hit2.point, Color.green);
-
                 hit = hit2;
                 return true;
             }
         }
-        if (hit3)
-        {
-            if (hit3.distance < .5f)
-            {
-                Debug.Log("cieling");
-                // Debug.DrawLine(transform.position, hit3.point, Color.green);
-                hit = hit3;
-                return true;
-            }
-        }
-        if (hit4)
+        else if (hit4)
         {
             if (hit4.distance < .5f)
             {
-                //Debug.DrawLine(transform.position, hit4.point, Color.green);
                 hit = hit4;
                 return true;
             }
         }
-        if (hit5)
+        else if (hit5)
         {
             if (hit5.distance < .5f)
             {
-                //Debug.DrawLine(transform.position, hit5.point, Color.green);
                 hit = hit5;
+                return true;
+            }
+        }
+        else if (hit3)
+        {
+            if (hit3.distance < .5f)
+            {
+                hit = hit3;
                 return true;
             }
         }
@@ -128,7 +115,6 @@ public class PlayerMovementController : MonoBehaviour
 
     public void GroundMovement(RaycastHit2D hit)
     {
-        transform.up = Vector2.Lerp(transform.up, hit.normal, 25 * Time.unscaledDeltaTime);
         
         if(Horz > 0)
         {
@@ -139,10 +125,11 @@ public class PlayerMovementController : MonoBehaviour
             transform.localScale = new Vector3(-.5f, transform.localScale.y, transform.localScale.z);
 
         }
-        if(Horz != 0)
+        if(Horz != 0 && hit.distance < .1f)
             rb.velocity = new Vector2(Horz * speed, rb.velocity.y);
-        
 
+
+        transform.up = Vector3.Slerp(transform.up, hit.normal, 25 * Time.fixedDeltaTime);
 
 
     }
@@ -196,17 +183,6 @@ public class PlayerMovementController : MonoBehaviour
     {
         Horz = Input.GetAxis("Horizontal");
         MovementStateMachine(currentMoveState);
-        //if (!tempCase)
-        //{
-        //    Vector2 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        //    var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        //    transform.up = Vector3.Slerp(transform.up, dir, Time.unscaledDeltaTime * 10);
-        //}
-        //else
-        //{
-        //    transform.right = new Vector2(transform.forward.x * Horz, 0);
-        //    rb.velocity = new Vector2(Horz * speed, rb.velocity.y);
-        //}
 
         if (isCrouching && transform.localScale != new Vector3(.5f,.25f, 1))
         {
