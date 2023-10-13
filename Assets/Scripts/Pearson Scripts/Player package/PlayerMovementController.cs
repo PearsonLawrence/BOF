@@ -74,14 +74,14 @@ public class PlayerMovementController : MonoBehaviour
         RaycastHit2D hit4 = Physics2D.Raycast(rayLeftPos, -Vector2.right, 1);
         RaycastHit2D hit5 = Physics2D.Raycast(rayRightPos, Vector2.right, 1);
 
-        Debug.DrawRay(rayFeetPos, -Vector2.up * .2f, Color.red);
-        Debug.DrawRay(rayUpPos, Vector2.up * .2f, Color.red);
-        Debug.DrawRay(rayLeftPos, -Vector2.right * .2f, Color.red);
-        Debug.DrawRay(rayRightPos, Vector2.right * .2f, Color.red);
+        Debug.DrawRay(rayFeetPos, -Vector2.up * .25f, Color.red);
+        Debug.DrawRay(rayUpPos, Vector2.up * .25f, Color.red);
+        Debug.DrawRay(rayLeftPos, -Vector2.right * .25f, Color.red);
+        Debug.DrawRay(rayRightPos, Vector2.right * .25f, Color.red);
         
         if (hit2)
         {
-            if (hit2.distance < .5f)
+            if (hit2.distance < .25f)
             {
                 hit = hit2;
                 return true;
@@ -89,7 +89,7 @@ public class PlayerMovementController : MonoBehaviour
         }
         else if (hit4)
         {
-            if (hit4.distance < .5f)
+            if (hit4.distance < .25f)
             {
                 hit = hit4;
                 return true;
@@ -97,7 +97,7 @@ public class PlayerMovementController : MonoBehaviour
         }
         else if (hit5)
         {
-            if (hit5.distance < .5f)
+            if (hit5.distance < .25f)
             {
                 hit = hit5;
                 return true;
@@ -105,7 +105,7 @@ public class PlayerMovementController : MonoBehaviour
         }
         else if (hit3)
         {
-            if (hit3.distance < .5f)
+            if (hit3.distance < .25f)
             {
                 hit = hit3;
                 return true;
@@ -131,7 +131,7 @@ public class PlayerMovementController : MonoBehaviour
             rb.velocity = new Vector2(Horz * speed, rb.velocity.y);
 
 
-        transform.up = Vector2.Lerp(transform.up, hit.normal, ((isSlow) ? 50 : 25)  * Time.fixedDeltaTime);
+        transform.up = Vector2.Lerp(transform.up, hit.normal, ((isSlow) ? 50 : 30)  * Time.fixedDeltaTime);
 
 
     }

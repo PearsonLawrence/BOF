@@ -20,18 +20,18 @@ public class PhysicsJump : MonoBehaviour
 
     // Update is called once per frame
 
-    public void Jump()
+    public void Jump(bool grounded)
     {
         rb.gravityScale = gravityScale;
         float jumpForce = Mathf.Sqrt(jumpHeight  * (Physics2D.gravity.y * rb.gravityScale) * -2) * rb.mass;
-        rb.AddRelativeForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+        rb.AddRelativeForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         if (rb.velocity.y > 0)
         {
-            rb.gravityScale = gravityScale * Time.timeScale;
+            rb.gravityScale = gravityScale;
         }
-        else
+        else if (rb.velocity.y < 0 && !grounded)
         {
-            rb.gravityScale = fallGravityScale * Time.timeScale;
+            rb.gravityScale = fallGravityScale;
         }
     }
 
@@ -44,7 +44,7 @@ public class PhysicsJump : MonoBehaviour
         }
         if (grounded && isJumping)
         {
-            rb.gravityScale = fallGravityScale;
+            //rb.gravityScale = fallGravityScale;
             isJumping = false;
         }
     }

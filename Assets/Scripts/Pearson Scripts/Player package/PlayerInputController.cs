@@ -78,7 +78,7 @@ public class PlayerInputController : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.W) && playerMovement.isGrounded)
         {
-            physJump.Jump();
+            physJump.Jump(playerMovement.isGrounded);
         }
 
         if (physJump.isJumping)
