@@ -36,6 +36,8 @@ public class PlayerMovementController : MonoBehaviour
 
     Vector3 StartScale;
 
+    public bool isSlow;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -116,20 +118,20 @@ public class PlayerMovementController : MonoBehaviour
     public void GroundMovement(RaycastHit2D hit)
     {
         
-        if(Horz > 0)
+        if(rb.velocity.x > 0)
         {
             transform.localScale = new Vector3(.5f, transform.localScale.y, transform.localScale.z);
         }
-        else if(Horz < 0)
+        else if(rb.velocity.x < 0)
         {
             transform.localScale = new Vector3(-.5f, transform.localScale.y, transform.localScale.z);
 
         }
-        if(Horz != 0 && hit.distance < .1f)
+        if(Horz != 0 && hit.distance < .25f)
             rb.velocity = new Vector2(Horz * speed, rb.velocity.y);
 
 
-        transform.up = Vector3.Slerp(transform.up, hit.normal, 25 * Time.fixedDeltaTime);
+        transform.up = Vector2.Lerp(transform.up, hit.normal, ((isSlow) ? 50 : 25)  * Time.fixedDeltaTime);
 
 
     }

@@ -15,6 +15,8 @@ public class PlayerInputController : MonoBehaviour
     [SerializeField]
     private PhysicsJump physJump;
 
+    private Rigidbody2D rb;
+
     public float minSlow = .01f;
     public float speed = 100;
 
@@ -24,23 +26,35 @@ public class PlayerInputController : MonoBehaviour
     float buttonPressWindow;
 
     string speedType;
+
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
         timeController = this.GetComponent<TimeController>();
         playerMovement = this.GetComponent<PlayerMovementController>();
         physJump = this.GetComponent<PhysicsJump>();
+        rb = this.GetComponent<Rigidbody2D>();
     }
 
 
-
+    bool isRunning;
     // Update is called once per frame
     void Update()
     {
-       
+        anim.SetBool("grounded", playerMovement.isGrounded);
+        if(!playerMovement.isGrounded)
+        {
+
+            anim.SetFloat("RotX", transform.up.x);
+            anim.SetFloat("RotY", transform.up.y);
+        }
+
+        isRunning = (playerMovement.Horz != 0);
+        anim.SetBool("Running", isRunning);
         goalSlow = (Input.GetKey(KeyCode.Space)) ? minSlow : 1;
         speedType = (Input.GetKey(KeyCode.Space)) ? "slow" : "reg";
-
+        playerMovement.isSlow = Input.GetKey(KeyCode.Space);
 
         if (timeController.currentScale != goalSlow)
         {
