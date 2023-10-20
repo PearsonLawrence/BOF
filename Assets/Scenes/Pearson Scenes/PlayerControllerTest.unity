@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 52164962}
   - component: {fileID: 52164961}
   - component: {fileID: 52164960}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlatLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -997,7 +997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8611d328b7a9e3b479cc8118b58d1997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 4
+  jumpHeight: 5
   gravityScale: 4
   fallGravityScale: 15
   isJumping: 0

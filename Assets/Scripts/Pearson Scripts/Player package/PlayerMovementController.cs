@@ -69,19 +69,19 @@ public class PlayerMovementController : MonoBehaviour
         rayLeftPos = new Vector2(transform.position.x - (StartScale.x + .1f), transform.position.y);
         rayRightPos = new Vector2(transform.position.x + (StartScale.x + .1f), transform.position.y);
    
-        RaycastHit2D hit2 = Physics2D.Raycast(rayFeetPos, -Vector2.up, 1);
-        RaycastHit2D hit3 = Physics2D.Raycast(rayUpPos, Vector2.up, 1);
-        RaycastHit2D hit4 = Physics2D.Raycast(rayLeftPos, -Vector2.right, 1);
-        RaycastHit2D hit5 = Physics2D.Raycast(rayRightPos, Vector2.right, 1);
+        RaycastHit2D hit2 = Physics2D.Raycast(transform.position, -Vector2.up, 1, LayerMask.GetMask("ground"));
+        RaycastHit2D hit3 = Physics2D.Raycast(transform.position, Vector2.up, 1, LayerMask.GetMask("ground"));
+        RaycastHit2D hit4 = Physics2D.Raycast(transform.position, -Vector2.right, 1, LayerMask.GetMask("ground"));
+        RaycastHit2D hit5 = Physics2D.Raycast(transform.position, Vector2.right, 1, LayerMask.GetMask("ground"));
 
-        Debug.DrawRay(rayFeetPos, -Vector2.up * .25f, Color.red);
-        Debug.DrawRay(rayUpPos, Vector2.up * .25f, Color.red);
-        Debug.DrawRay(rayLeftPos, -Vector2.right * .25f, Color.red);
-        Debug.DrawRay(rayRightPos, Vector2.right * .25f, Color.red);
+        Debug.DrawRay(transform.position, -Vector2.up * .75f, Color.red);
+        Debug.DrawRay(transform.position, Vector2.up * .75f, Color.red);
+        Debug.DrawRay(transform.position, -Vector2.right * .75f, Color.red);
+        Debug.DrawRay(transform.position, Vector2.right * .75f, Color.red);
         
         if (hit2)
         {
-            if (hit2.distance < .25f)
+            if (hit2.distance < .75f)
             {
                 hit = hit2;
                 return true;
@@ -89,7 +89,7 @@ public class PlayerMovementController : MonoBehaviour
         }
         else if (hit4)
         {
-            if (hit4.distance < .25f)
+            if (hit4.distance < .75f)
             {
                 hit = hit4;
                 return true;
@@ -97,7 +97,7 @@ public class PlayerMovementController : MonoBehaviour
         }
         else if (hit5)
         {
-            if (hit5.distance < .25f)
+            if (hit5.distance < .75f)
             {
                 hit = hit5;
                 return true;
@@ -105,7 +105,7 @@ public class PlayerMovementController : MonoBehaviour
         }
         else if (hit3)
         {
-            if (hit3.distance < .25f)
+            if (hit3.distance < .75f)
             {
                 hit = hit3;
                 return true;
@@ -127,7 +127,7 @@ public class PlayerMovementController : MonoBehaviour
             transform.localScale = new Vector3(-.5f, transform.localScale.y, transform.localScale.z);
 
         }
-        if(Horz != 0 && hit.distance < .25f)
+        if(Horz != 0 && hit.distance < .75f)
             rb.velocity = new Vector2(Horz * speed, rb.velocity.y);
 
 
