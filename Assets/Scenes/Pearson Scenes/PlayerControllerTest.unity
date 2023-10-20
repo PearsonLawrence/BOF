@@ -1566,6 +1566,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Focus: {fileID: 1017933758}
   LagSpeed: 1
+  VertOffset: 2
 --- !u!1 &1239418759
 GameObject:
   m_ObjectHideFlags: 0
