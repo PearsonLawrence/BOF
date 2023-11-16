@@ -25,14 +25,14 @@ public class PhysicsJump : MonoBehaviour
         rb.gravityScale = gravityScale;
         float jumpForce = Mathf.Sqrt(jumpHeight  * (Physics2D.gravity.y * rb.gravityScale) * -2) * rb.mass;
         rb.AddRelativeForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        if (rb.velocity.y > 0)
-        {
-            rb.gravityScale = gravityScale;
-        }
-        else if (rb.velocity.y < 0 && !grounded)
-        {
-            rb.gravityScale = fallGravityScale;
-        }
+        //if (rb.velocity.y > 0)
+        //{
+        //    rb.gravityScale = gravityScale;
+        //}
+        //else if (rb.velocity.y < 0 && !grounded)
+        //{
+        //    rb.gravityScale = fallGravityScale;
+        //}
     }
 
     public void gravityChange(float pTime, float pWindow, bool grounded)
@@ -44,7 +44,7 @@ public class PhysicsJump : MonoBehaviour
         }
         if (grounded && isJumping)
         {
-            //rb.gravityScale = fallGravityScale;
+            rb.gravityScale = gravityScale;
             isJumping = false;
         }
     }

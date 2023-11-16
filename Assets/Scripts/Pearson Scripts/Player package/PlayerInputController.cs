@@ -27,7 +27,6 @@ public class PlayerInputController : MonoBehaviour
 
     string speedType;
 
-    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,16 +41,8 @@ public class PlayerInputController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        anim.SetBool("grounded", playerMovement.isGrounded);
-        if(!playerMovement.isGrounded)
-        {
-
-            anim.SetFloat("RotX", transform.up.x);
-            anim.SetFloat("RotY", transform.up.y);
-        }
 
         isRunning = (playerMovement.Horz != 0);
-        anim.SetBool("Running", isRunning);
         goalSlow = (Input.GetKey(KeyCode.Space)) ? minSlow : 1;
         speedType = (Input.GetKey(KeyCode.Space)) ? "slow" : "reg";
         playerMovement.isSlow = Input.GetKey(KeyCode.Space);
@@ -65,7 +56,6 @@ public class PlayerInputController : MonoBehaviour
          //   Debug.Log("test");
         }
 
-        
 
         if (Input.GetKey(KeyCode.S))
         {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
@@ -69,48 +70,38 @@ public class PlayerMovementController : MonoBehaviour
         rayLeftPos = new Vector2(transform.position.x - (StartScale.x + .1f), transform.position.y);
         rayRightPos = new Vector2(transform.position.x + (StartScale.x + .1f), transform.position.y);
    
-        RaycastHit2D hit2 = Physics2D.Raycast(transform.position, -Vector2.up, 1, LayerMask.GetMask("ground"));
-        RaycastHit2D hit3 = Physics2D.Raycast(transform.position, Vector2.up, 1, LayerMask.GetMask("ground"));
-        RaycastHit2D hit4 = Physics2D.Raycast(transform.position, -Vector2.right, 1, LayerMask.GetMask("ground"));
-        RaycastHit2D hit5 = Physics2D.Raycast(transform.position, Vector2.right, 1, LayerMask.GetMask("ground"));
+        RaycastHit2D hit2 = Physics2D.Raycast(rayFeetPos, -Vector2.up, 1);
+        RaycastHit2D hit3 = Physics2D.Raycast(rayUpPos, Vector2.up, 1);
+        RaycastHit2D hit4 = Physics2D.Raycast(rayLeftPos, -Vector2.right, 1);
+        RaycastHit2D hit5 = Physics2D.Raycast(rayRightPos, Vector2.right, 1);
 
-        Debug.DrawRay(transform.position, -Vector2.up * .75f, Color.red);
-        Debug.DrawRay(transform.position, Vector2.up * .75f, Color.red);
-        Debug.DrawRay(transform.position, -Vector2.right * .75f, Color.red);
-        Debug.DrawRay(transform.position, Vector2.right * .75f, Color.red);
-        
+        Debug.DrawRay(rayFeetPos, -Vector2.up * .2f, Color.red);
+        Debug.DrawRay(rayUpPos, Vector2.up * .2f, Color.red);
+        Debug.DrawRay(rayLeftPos, -Vector2.right * .2f, Color.red);
+        Debug.DrawRay(rayRightPos, Vector2.right * .2f, Color.red);
+
+        RaycastHit2D closestHit = new RaycastHit2D();
+        closestHit.distance = 1;
         if (hit2)
+            closestHit = (hit2.distance < closestHit.distance) ? hit2 : closestHit;
+        if (hit3)
+            closestHit = (hit3.distance < closestHit.distance) ? hit3 : closestHit;
+        if (hit4)
+            closestHit = (hit4.distance < closestHit.distance) ? hit4 : closestHit;
+        if (hit5)
+            closestHit = (hit5.distance < closestHit.distance) ? hit5 : closestHit;
+
+        if (closestHit)
         {
-            if (hit2.distance < .75f)
+            Debug.Log("??");
+            if (closestHit.distance < .2f)
             {
-                hit = hit2;
+                Debug.Log("touch");
+                hit = closestHit;
                 return true;
             }
         }
-        else if (hit4)
-        {
-            if (hit4.distance < .75f)
-            {
-                hit = hit4;
-                return true;
-            }
-        }
-        else if (hit5)
-        {
-            if (hit5.distance < .75f)
-            {
-                hit = hit5;
-                return true;
-            }
-        }
-        else if (hit3)
-        {
-            if (hit3.distance < .75f)
-            {
-                hit = hit3;
-                return true;
-            }
-        }
+
         hit = new RaycastHit2D();
         return false;
     }
@@ -127,15 +118,15 @@ public class PlayerMovementController : MonoBehaviour
             transform.localScale = new Vector3(-.5f, transform.localScale.y, transform.localScale.z);
 
         }
-        if(Horz != 0 && hit.distance < .75f)
+        if(hit.distance < .1f && hit.normal == Vector2.up)
             rb.velocity = new Vector2(Horz * speed, rb.velocity.y);
 
-
-        transform.up = Vector2.Lerp(transform.up, hit.normal, ((isSlow) ? 50 : 30)  * Time.fixedDeltaTime);
+        if(hit.distance < .1f)
+            transform.up = Vector2.Lerp(transform.up, hit.normal, ((isSlow) ? 40 : 20)  * Time.fixedDeltaTime);
 
 
     }
-    public void AirMovement()
+    public void AirMovement(RaycastHit2D hit)
     {
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -155,7 +146,8 @@ public class PlayerMovementController : MonoBehaviour
 
             }
         }
-       
+        if (hit.distance < .1f)
+            transform.up = Vector2.Lerp(transform.up, hit.normal, ((isSlow) ? 50 : 25) * Time.fixedDeltaTime);
     }
     public void MovementStateMachine(MovementStates state)
     {
@@ -168,7 +160,7 @@ public class PlayerMovementController : MonoBehaviour
                 GroundMovement(hit);
                 break;
             case MovementStates.AIR_MOVEMENT:
-                AirMovement();
+                AirMovement(hit);
                 break;
             case MovementStates.WALL_MOVEMENT:
                 break;
