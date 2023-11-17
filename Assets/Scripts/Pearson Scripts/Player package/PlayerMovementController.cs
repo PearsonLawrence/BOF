@@ -122,7 +122,7 @@ public class PlayerMovementController : MonoBehaviour
             rb.velocity = new Vector2(Horz * speed, rb.velocity.y);
 
         if(hit.distance < .1f)
-            transform.up = Vector2.Lerp(transform.up, hit.normal, ((isSlow) ? 40 : 20)  * Time.fixedDeltaTime);
+            transform.up = Vector2.Lerp(transform.up, hit.normal, ((isSlow) ? 45 : 25)  * Time.fixedDeltaTime);
 
 
     }
@@ -146,8 +146,7 @@ public class PlayerMovementController : MonoBehaviour
 
             }
         }
-        if (hit.distance < .1f)
-            transform.up = Vector2.Lerp(transform.up, hit.normal, ((isSlow) ? 50 : 25) * Time.fixedDeltaTime);
+        
     }
     public void MovementStateMachine(MovementStates state)
     {

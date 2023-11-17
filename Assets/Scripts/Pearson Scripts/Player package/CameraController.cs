@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour
     public float LagSpeed;
     private Vector3 toLocation;
     public float VertOffset = 3;
+    public float ZOffset = 15;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        toLocation = new Vector3(Focus.transform.position.x, Focus.transform.position.y + VertOffset, Focus.transform.position.z - 20);
+        toLocation = new Vector3(Focus.transform.position.x, Focus.transform.position.y + VertOffset, Focus.transform.position.z - ZOffset);
         transform.position = Vector3.Lerp(transform.position, toLocation, LagSpeed * Time.unscaledDeltaTime) ;
     }
 }
