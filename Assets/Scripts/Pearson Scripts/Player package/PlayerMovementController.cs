@@ -201,6 +201,7 @@ public class PlayerMovementController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        speed = (isSlow) ? slowSpeed : regSpeed;
         Horz = Input.GetAxis("Horizontal");
         MovementStateMachine(currentMoveState);
 
