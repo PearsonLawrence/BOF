@@ -25,10 +25,10 @@ public class PhysicsJump : MonoBehaviour
     {
         Vector2 FeetPos = new Vector2(transform.position.x, transform.position.y - (.5f));
         rb.gravityScale = gravityScale;
-        float jumpForce = Mathf.Sqrt(jumpHeight  * (Physics2D.gravity.y * rb.gravityScale) * -2) * rb.mass;
+        float jumpForce = Mathf.Sqrt(jumpHeight  * (-9.8f * rb.gravityScale) * -2) * rb.mass;
         rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
 
-        Instantiate<GameObject>(particleTest, spawnPoint.transform.position, new Quaternion());
+        
         //if (rb.velocity.y > 0)
         //{
         //    rb.gravityScale = gravityScale;

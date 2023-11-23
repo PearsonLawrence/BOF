@@ -19,7 +19,7 @@ public class PlayerInputController : MonoBehaviour
 
     public float minSlow = .01f;
     public float speed = 100;
-
+    public Vector2 tempGrav;
     private float goalSlow;
 
     float buttonPressTime;
@@ -41,7 +41,6 @@ public class PlayerInputController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         isRunning = (playerMovement.Horz != 0);
         goalSlow = (Input.GetKey(KeyCode.Space)) ? minSlow : 1;
         speedType = (Input.GetKey(KeyCode.Space)) ? "slow" : "reg";
@@ -56,6 +55,18 @@ public class PlayerInputController : MonoBehaviour
          //   Debug.Log("test");
         }
 
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            playerMovement.gravityChanged = true;
+            tempGrav = playerMovement.currentSurface * 9.8f;
+            Physics2D.gravity = tempGrav;
+        }
+        else
+        {
+            playerMovement.gravityChanged = false;
+            Physics2D.gravity = new Vector2(0, -9.8f);
+
+        }
 
         if (Input.GetKey(KeyCode.S))
         {
@@ -66,14 +77,21 @@ public class PlayerInputController : MonoBehaviour
             playerMovement.isCrouching = false;
         }
         
-        if (Input.GetKeyDown(KeyCode.W) && playerMovement.isGrounded)
+        if (Input.GetKeyDown(KeyCode.W) && playerMovement.isGrounded && playerMovement.jumpDelay == false)
         {
+            buttonPressTime = 0;
+            playerMovement.jumpDelay = true;
             physJump.Jump(playerMovement.isGrounded);
+        }
+        buttonPressTime += Time.unscaledDeltaTime;
+        if(buttonPressTime > .25f)
+        {
+            playerMovement.jumpDelay = false;
         }
 
         if (physJump.isJumping)
         {
-            buttonPressTime += Time.unscaledDeltaTime;
+            
 
             physJump.gravityChange(buttonPressTime, buttonPressWindow, playerMovement.isGrounded);
         }
