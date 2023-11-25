@@ -7,7 +7,11 @@ public class FlyingEnemy : MonoBehaviour
     public float speed;
     public bool chase = false;
     public Transform startingPoint;
+    public float stoppingDistance = 1f;
     private GameObject player;
+    public float circularMotionRadius = 2f;
+    private float circularMotionAngle = 0f;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -21,21 +25,41 @@ public class FlyingEnemy : MonoBehaviour
     {
         if (player == null)
             return;
-        if (chase == true)
+        float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
+
+        if(distanceToPlayer <= stoppingDistance)
+        {
+            chase = false;
+        }
+        else
+        {
+            chase = true;
+        }
+        if (chase)
             Chase();
         else
+        {
             ReturnToStartPoint();
-            Flip();
+        }
+        Flip();
+            
 
     }
 
     private void Chase()
-    {
+    { 
         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed*Time.deltaTime);
     }
 
     private void ReturnToStartPoint()
     {
+        circularMotionAngle += speed * Time.deltaTime;
+
+        float x = startingPoint.position.x + Mathf.Cos(circularMotionAngle);
+        float y = startingPoint.position.y + Mathf.Sin(circularMotionAngle);
+
+        Vector2 circularMotionPosition = new Vector2(x, y);
+        
         transform.position = Vector2.MoveTowards(transform.position, startingPoint.position, speed*Time.deltaTime);
     }
 
