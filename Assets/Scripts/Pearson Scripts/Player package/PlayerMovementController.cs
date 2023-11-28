@@ -1,60 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public enum SubMovementStates
 {
-       FLUID_MOVEMENT,
-       STEALTH_MOVEMENT,
-       CLASSIC_MOVEMENT,
+    FLUID_MOVEMENT,
+    STEALTH_MOVEMENT,
+    CLASSIC_MOVEMENT,
 }
+
 public enum MovementStates
 {
     GROUND_MOVEMENT,
     AIR_MOVEMENT,
     WALL_MOVEMENT
 }
+
 public class PlayerMovementController : MonoBehaviour
 {
+    [SerializeField] private float slowSpeed;
+    [SerializeField] private float regSpeed;
+
     private float speed;
-    [SerializeField] float slowSpeed;
-    [SerializeField] float regSpeed;
-    [SerializeField] float transitionSpeed;
+    private Rigidbody2D rb;
+    private Vector3 startScale;
+    private Vector2 rayFeetPos, rayLeftPos, rayRightPos, rayUpPos;
+    public Vector2 currentSurface;
+    private MovementStates currentMoveState;
+
     public float Horz;
     public bool isCrouching;
     public bool isGrounded;
-    Rigidbody2D rb;
-    // Start is called before the first frame update
-    bool tempCase;
-    MovementStates currentMoveState;
-    SubMovementStates currentSubState;
-    Ray rayFeet, rayDown, rayLeft, rayRight, rayUp;
-
-    public Vector2 currentSurface;
-
-    Vector2 rayFeetPos, rayLeftPos, rayRightPos, rayUpPos;
-
-    Vector3 StartScale;
     public bool jumpDelay;
     public bool gravityChanged;
     public bool isSlow;
 
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         speed = regSpeed;
-        StartScale = transform.localScale;
+        startScale = transform.localScale;
     }
-    public void moveSpeed(string type)
+
+    public void MoveSpeed(string type)
     {
-        switch(type)
+        switch (type)
         {
             case "reg":
-                speed = Mathf.MoveTowards(speed, regSpeed, Time.unscaledDeltaTime * speed); ;
+                speed = Mathf.MoveTowards(speed, regSpeed, Time.unscaledDeltaTime * speed);
                 break;
             case "slow":
                 speed = Mathf.MoveTowards(speed, slowSpeed, Time.unscaledDeltaTime * speed);
@@ -64,46 +55,19 @@ public class PlayerMovementController : MonoBehaviour
                 break;
         }
     }
-    public LayerMask LayersToHit;
-    private Vector3 moveDirection;
-    public bool getGrounded(out RaycastHit2D hit)
+
+    private bool GetGrounded(out RaycastHit2D hit)
     {
+        UpdateRayPositions();
+        RaycastHit2D[] hits = { Physics2D.Raycast(rayFeetPos, -Vector2.up, 1), Physics2D.Raycast(rayLeftPos, -Vector2.right, 1),
+                                Physics2D.Raycast(rayRightPos, Vector2.right, 1), Physics2D.Raycast(rayUpPos, Vector2.up, 1) };
+        hit = FindClosestHit(hits);
 
-
-        rayFeetPos = new Vector2(transform.position.x, transform.position.y - (StartScale.y + .1f));
-        rayUpPos = new Vector2(transform.position.x, transform.position.y + (StartScale.y + .1f));
-        rayLeftPos = new Vector2(transform.position.x - (StartScale.x + .1f), transform.position.y);
-        rayRightPos = new Vector2(transform.position.x + (StartScale.x + .1f), transform.position.y);
-   
-        RaycastHit2D hit2 = Physics2D.Raycast(rayFeetPos, -Vector2.up, 1);
-        RaycastHit2D hit3 = Physics2D.Raycast(rayUpPos, Vector2.up, 1);
-        RaycastHit2D hit4 = Physics2D.Raycast(rayLeftPos, -Vector2.right, 1);
-        RaycastHit2D hit5 = Physics2D.Raycast(rayRightPos, Vector2.right, 1);
-
-        Debug.DrawRay(rayFeetPos, -Vector2.up * .2f, Color.red);
-        Debug.DrawRay(rayUpPos, Vector2.up * .2f, Color.red);
-        Debug.DrawRay(rayLeftPos, -Vector2.right * .2f, Color.red);
-        Debug.DrawRay(rayRightPos, Vector2.right * .2f, Color.red);
-
-        RaycastHit2D closestHit = new RaycastHit2D();
-        closestHit.distance = 1;
-        if (hit2)
-            closestHit = (hit2.distance < closestHit.distance && hit2.transform.gameObject != this.gameObject) ? hit2 : closestHit;
-        if (hit3)
-            closestHit = (hit3.distance < closestHit.distance && hit3.transform.gameObject != this.gameObject) ? hit3 : closestHit;
-        if (hit4)
-            closestHit = (hit4.distance < closestHit.distance && hit4.transform.gameObject != this.gameObject) ? hit4 : closestHit;
-        if (hit5)
-            closestHit = (hit5.distance < closestHit.distance && hit5.transform.gameObject != this.gameObject) ? hit5 : closestHit;
-
-        if (closestHit)
+        if (hit)
         {
-            Debug.Log("??");
-            if (closestHit.distance < .1f)
+            if (hit.distance < 0.1f)
             {
-                Debug.Log("touch");
-                hit = closestHit;
-                currentSurface = -closestHit.normal;
+                currentSurface = -hit.normal;
                 return true;
             }
         }
@@ -112,19 +76,42 @@ public class PlayerMovementController : MonoBehaviour
         return false;
     }
 
+    private RaycastHit2D FindClosestHit(RaycastHit2D[] hits)
+    {
+        RaycastHit2D closestHit = new RaycastHit2D();
+        closestHit.distance = 1f;
+
+        foreach (var hit in hits)
+        {
+            if (hit && hit.distance < closestHit.distance && hit.transform.gameObject != gameObject)
+            {
+                closestHit = hit;
+            }
+        }
+
+        return closestHit;
+    }
+
+    private void UpdateRayPositions()
+    {
+        rayFeetPos = new Vector2(transform.position.x, transform.position.y - (startScale.y + .1f));
+        rayUpPos = new Vector2(transform.position.x, transform.position.y + (startScale.y + .1f));
+        rayLeftPos = new Vector2(transform.position.x - (startScale.x + .1f), transform.position.y);
+        rayRightPos = new Vector2(transform.position.x + (startScale.x + .1f), transform.position.y);
+    }
     public void GroundMovement(RaycastHit2D hit)
     {
-        if (rb.velocity.x > 0)
-        {
-            transform.localScale = new Vector3(.5f, transform.localScale.y, transform.localScale.z);
-        }
-        else if (rb.velocity.x < 0)
-        {
-            transform.localScale = new Vector3(-.5f, transform.localScale.y, transform.localScale.z);
+        //if (rb.velocity.x > 0)
+        //{
+        //    transform.localScale = new Vector3(.5f, transform.localScale.y, transform.localScale.z);
+        //}
+        //else if (rb.velocity.x < 0)
+        //{
+        //    transform.localScale = new Vector3(-.5f, transform.localScale.y, transform.localScale.z);
 
-        }
+        //}
 
-        if(gravityChanged)
+        if(gravityChanged && hit.distance < .005f)
         {
             if (hit.distance < .005f && !jumpDelay)
             {
@@ -156,31 +143,15 @@ public class PlayerMovementController : MonoBehaviour
 
         if (hit.distance < .1f)
             transform.up = Vector2.Lerp(transform.up, hit.normal, ((isSlow) ? 45 : 25) * Time.fixedDeltaTime);
-        //if (Input.GetKey(KeyCode.LeftShift))
-        //{
-        //    Vector2 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        //    var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        //    transform.up = Vector3.Slerp(transform.up, dir, Time.unscaledDeltaTime * 5);
-        //}
-        //else
-        //{
-        //    if (Horz > 0)
-        //    {
-        //        transform.localScale = new Vector3(.5f, transform.localScale.y, transform.localScale.z);
-        //    }
-        //    else if (Horz < 0)
-        //    {
-        //        transform.localScale = new Vector3(-.5f, transform.localScale.y, transform.localScale.z);
-        //    }
-        //}
 
     }
-    public void MovementStateMachine(MovementStates state)
+    private void MovementStateMachine(MovementStates state)
     {
         RaycastHit2D hit;
-        isGrounded = getGrounded(out hit);
+        isGrounded = GetGrounded(out hit);
         state = (isGrounded) ? MovementStates.GROUND_MOVEMENT : MovementStates.AIR_MOVEMENT;
-        switch(state)
+
+        switch (state)
         {
             case MovementStates.GROUND_MOVEMENT:
                 GroundMovement(hit);
@@ -189,10 +160,10 @@ public class PlayerMovementController : MonoBehaviour
                 AirMovement(hit);
                 break;
             case MovementStates.WALL_MOVEMENT:
+                // Wall movement implementation
                 break;
         }
     }
-
     public void Update()
     {
         

@@ -1,100 +1,100 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInputController : MonoBehaviour
 {
-    public bool isSlowMo;
-
     [SerializeField]
     private TimeController timeController;
 
     [SerializeField]
     private PlayerMovementController playerMovement;
     [SerializeField]
-    private PhysicsJump physJump;
+    private PlayerCombatComponent playerCombat;
+
+    [SerializeField]
+    private PhysicsJump physicsJump;
 
     private Rigidbody2D rb;
 
-    public float minSlow = .01f;
-    public float speed = 100;
-    public Vector2 tempGrav;
+    public float MinSlow = 0.01f;
+    public float Speed = 100;
+
+    public Vector2 TempGravity;
     private float goalSlow;
 
-    float buttonPressTime;
-    float buttonPressWindow;
+    private float buttonPressTime;
+    private const float ButtonPressWindow = 0.25f;
+    private string speedType;
+    public bool IsRunning { get; private set; }
 
-    string speedType;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        timeController = this.GetComponent<TimeController>();
-        playerMovement = this.GetComponent<PlayerMovementController>();
-        physJump = this.GetComponent<PhysicsJump>();
-        rb = this.GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
+        timeController = GetComponent<TimeController>();
     }
 
-
-    bool isRunning;
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        isRunning = (playerMovement.Horz != 0);
-        goalSlow = (Input.GetKey(KeyCode.Space)) ? minSlow : 1;
-        speedType = (Input.GetKey(KeyCode.Space)) ? "slow" : "reg";
-        playerMovement.isSlow = Input.GetKey(KeyCode.Space);
+        HandleMovementInput();
+        HandleTimeControl();
+        HandleJumpInput();
 
-        if (timeController.currentScale != goalSlow)
+        if(Input.GetMouseButtonDown(0))
         {
-            timeController.currentScale = Mathf.MoveTowards(timeController.currentScale, goalSlow, Time.unscaledDeltaTime * speed);
-            timeController.fixedTime = Mathf.MoveTowards(timeController.fixedTime, .02f, Time.unscaledDeltaTime * speed);
-            timeController.ChangeTimeScale();
-            playerMovement.moveSpeed(speedType);
-         //   Debug.Log("test");
+            playerCombat.doAttack();
         }
+    }
 
-        if(Input.GetKey(KeyCode.LeftShift))
+    private void HandleMovementInput()
+    {
+        IsRunning = playerMovement.Horz != 0;
+        playerMovement.isSlow = Input.GetKey(KeyCode.Space);
+        playerMovement.isCrouching = Input.GetKey(KeyCode.S);
+
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             playerMovement.gravityChanged = true;
-            tempGrav = playerMovement.currentSurface * 9.8f;
-            Physics2D.gravity = tempGrav;
+            TempGravity = playerMovement.currentSurface * 9.8f;
+            Physics2D.gravity = TempGravity;
         }
         else
         {
             playerMovement.gravityChanged = false;
-            Physics2D.gravity = new Vector2(0, -9.8f);
+            Physics2D.gravity = Vector2.down * 9.8f;
+        }
+    }
 
-        }
+    private void HandleTimeControl()
+    {
+        goalSlow = Input.GetKey(KeyCode.Space) ? MinSlow : 1;
+        speedType = Input.GetKey(KeyCode.Space) ? "slow" : "reg";
 
-        if (Input.GetKey(KeyCode.S))
+        if (timeController.currentScale != goalSlow)
         {
-            playerMovement.isCrouching = true;
+            timeController.currentScale = Mathf.MoveTowards(timeController.currentScale, goalSlow, Time.unscaledDeltaTime * Speed);
+            timeController.fixedTime = Mathf.MoveTowards(timeController.fixedTime, 0.02f, Time.unscaledDeltaTime * Speed);
+            timeController.ChangeTimeScale();
+            playerMovement.MoveSpeed(speedType);
         }
-        else
-        {
-            playerMovement.isCrouching = false;
-        }
-        
-        if (Input.GetKeyDown(KeyCode.W) && playerMovement.isGrounded && playerMovement.jumpDelay == false)
+    }
+
+    private void HandleJumpInput()
+    {
+        if (Input.GetKeyDown(KeyCode.W) && playerMovement.isGrounded && !playerMovement.jumpDelay)
         {
             buttonPressTime = 0;
             playerMovement.jumpDelay = true;
-            physJump.Jump(playerMovement.isGrounded);
+            physicsJump.Jump(playerMovement.isGrounded);
         }
+
         buttonPressTime += Time.unscaledDeltaTime;
-        if(buttonPressTime > .25f)
+        if (buttonPressTime > ButtonPressWindow)
         {
             playerMovement.jumpDelay = false;
         }
 
-        if (physJump.isJumping)
+        if (physicsJump.isJumping)
         {
-            
-
-            physJump.gravityChange(buttonPressTime, buttonPressWindow, playerMovement.isGrounded);
+            physicsJump.GravityChange(buttonPressTime, ButtonPressWindow, playerMovement.isGrounded);
         }
-
     }
 }
