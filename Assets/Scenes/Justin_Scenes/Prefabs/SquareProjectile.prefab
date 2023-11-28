@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7435863066338993779}
   - component: {fileID: 6764014213151648788}
   - component: {fileID: 159093624273976901}
+  - component: {fileID: 7424162477586287574}
   m_Layer: 0
   m_Name: SquareProjectile
   m_TagString: Untagged
@@ -112,3 +113,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &7424162477586287574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590346799463799200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a652522437f80c49b7aa2bf7a45d896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 1

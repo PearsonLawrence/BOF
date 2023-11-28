@@ -135,9 +135,9 @@ GameObject:
   - component: {fileID: 12574006}
   - component: {fileID: 12574005}
   - component: {fileID: 12574004}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Platform
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -176,7 +176,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12574003}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 631981865}
   - component: {fileID: 631981864}
   - component: {fileID: 631981863}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 654396827}
   - component: {fileID: 654396826}
   - component: {fileID: 654396825}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -553,9 +553,9 @@ GameObject:
   - component: {fileID: 674169498}
   - component: {fileID: 674169497}
   - component: {fileID: 674169496}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Platform (1)
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -893,6 +893,7 @@ GameObject:
   - component: {fileID: 767349427}
   - component: {fileID: 767349430}
   - component: {fileID: 767349431}
+  - component: {fileID: 767349432}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -1013,6 +1014,10 @@ MonoBehaviour:
   startingPoint: {fileID: 925842748}
   stoppingDistance: 2
   circularMotionRadius: 9
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  avoidanceDistance: 1
 --- !u!114 &767349431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1027,6 +1032,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 683138490325392874, guid: 0c642616a236f80408a20e6be9c33983, type: 3}
   projectilePos: {fileID: 1274163955}
+--- !u!58 &767349432
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767349426}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &774530101
 GameObject:
   m_ObjectHideFlags: 0
@@ -1038,7 +1078,7 @@ GameObject:
   - component: {fileID: 774530104}
   - component: {fileID: 774530103}
   - component: {fileID: 774530102}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Left Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1200,9 +1240,9 @@ GameObject:
   - component: {fileID: 1020496143}
   - component: {fileID: 1020496142}
   - component: {fileID: 1020496141}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Platform (2)
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1340,7 +1380,7 @@ Transform:
   m_GameObject: {fileID: 1020496140}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.77, y: -1.87, z: 0}
+  m_LocalPosition: {x: 4.81, y: -1.25, z: 0}
   m_LocalScale: {x: 2.9129663, y: 0.6214, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1388,7 +1428,7 @@ GameObject:
   - component: {fileID: 1699219971}
   - component: {fileID: 1699219970}
   - component: {fileID: 1699219969}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Right Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
