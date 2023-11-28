@@ -176,7 +176,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12574003}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -989,8 +989,8 @@ Transform:
   m_GameObject: {fileID: 767349426}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.91, y: 2.05, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -2.8314, y: 2.0008, z: 0}
+  m_LocalScale: {x: 1.1573, y: 1.0983, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1274163955}
@@ -1010,7 +1010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  chase: 1
+  chase: 0
   startingPoint: {fileID: 925842748}
   stoppingDistance: 2
   circularMotionRadius: 9
