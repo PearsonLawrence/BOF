@@ -32,6 +32,11 @@ public class PlayerInputController : MonoBehaviour
         timeController = GetComponent<TimeController>();
     }
 
+    public PlayerCombatComponent GetPlayerCombatComponent()
+    {
+        return playerCombat;
+    }
+
     private void Update()
     {
         HandleMovementInput();

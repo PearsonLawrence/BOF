@@ -6,7 +6,7 @@ using UnityEngine;
 public class collisionDamageComponent : MonoBehaviour
 {
     HealthComponent owner;
-    public float regularDamage, heavyDamage, currentDamage;
+    public float regularDamage, heavyDamage, buffedDamage, currentDamage;
     public bool isDestroyedOnHit;
     public bool isAttacking;
     public void OnTriggerEnter2D(Collider2D collision)

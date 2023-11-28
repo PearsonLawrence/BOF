@@ -12,9 +12,12 @@ public class HealthComponent : MonoBehaviour
     public float currentHealth;
 
     [SerializeField] private GameObject deathParticlePrefab;
+    [SerializeField] private GameObject dropPrefab;
 
-    [SerializeField]
-    private bool isPlayerHealth;
+    [SerializeField] private bool isPlayerHealth;
+    [SerializeField] private bool canDropPowerup;
+
+
 
 
     [SerializeField] private Image healthBar;
@@ -30,11 +33,17 @@ public class HealthComponent : MonoBehaviour
         if(isPlayerHealth && healthBar != null)
         {
             healthBar.fillAmount = currentHealth / maxHealth;
+
+            if(dropPrefab != null) Instantiate(dropPrefab, transform.position, Quaternion.identity);
         }
 
         if(currentHealth <= 0)
         {
-            Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
+            if (deathParticlePrefab != null) Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
+
+            if(canDropPowerup && dropPrefab != null)
+                Instantiate(dropPrefab, transform.position, Quaternion.identity);
+
             Destroy(this.gameObject);
         }
     }
