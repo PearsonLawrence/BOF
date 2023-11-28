@@ -7,11 +7,12 @@ public class EnemyShoot : MonoBehaviour
     public GameObject projectile;
     public Transform projectilePos;
 
+
     private float timer;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -19,7 +20,7 @@ public class EnemyShoot : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if(timer > 1.5)
+        if (timer > 1.5)
         {
             timer = 0;
             shoot();
@@ -30,4 +31,8 @@ public class EnemyShoot : MonoBehaviour
     {
         Instantiate(projectile, projectilePos.position, Quaternion.identity);
     }
+
 }
+
+
+

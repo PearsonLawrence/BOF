@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 62844989}
   - component: {fileID: 62844988}
   - component: {fileID: 62844990}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Platform
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 822510253}
   - component: {fileID: 822510252}
   - component: {fileID: 822510251}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
