@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FireBullets : MonoBehaviour
 {
+
     [SerializeField]
     private int bulletsAmount = 10;
 
@@ -34,8 +35,7 @@ public class FireBullets : MonoBehaviour
             bul.transform.position = transform.position;
             bul.transform.rotation = transform.rotation;
             bul.SetActive(true);
-            bul.GetComponent<StarBullet>().SetMoveDirection(bulDir);
-
+           // bul.GetComponent<StarBullet>().SetMoveDirection(bulDir); //TODO FIX
             angle += angleStep;
         }
     }
