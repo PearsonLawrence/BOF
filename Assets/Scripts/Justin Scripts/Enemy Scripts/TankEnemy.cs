@@ -5,14 +5,20 @@ using UnityEngine;
 public class TankEnemy : MonoBehaviour
 {
     public float speed;
-    //private float distance;
+    public float empRadius = 5f;
+    public float empForce = 10f;
 
     private bool movingRight = true;
     public Transform groundDetection;
-    public Transform wallDetection;
+
+    private void Start()
+    {
+        TriggerEmpPulse();
+    }
+
 
     // Update is called once per frame
-    void Update()
+    void Update() // add wall detection after alpha
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
 
@@ -36,8 +42,9 @@ public class TankEnemy : MonoBehaviour
             
             
         }
-    }
 
+      
+    }
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -45,6 +52,36 @@ public class TankEnemy : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;   
         }
     }
+
+    private void TriggerEmpPulse()
+    {
+        Debug.Log("EMP Pulse triggered.");
+        
+        
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, empRadius);
+
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.gameObject.CompareTag("Player"))
+            {
+                Debug.Log("Player Detected!");
+                Rigidbody2D rb = collider.gameObject.GetComponent<Rigidbody2D>();
+
+                if (rb != null)
+                {
+                    Vector2 empDirection = (collider.transform.position - transform.position).normalized;
+                    rb.AddForce(empDirection * empForce, ForceMode2D.Impulse);
+                }
+            }
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, empRadius);
+    }
+
 
 
 }

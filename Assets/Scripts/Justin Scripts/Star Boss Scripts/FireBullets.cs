@@ -11,11 +11,15 @@ public class FireBullets : MonoBehaviour
     [SerializeField]
     private float startAngle = 90f, endAngle = 270f;
 
+    private float timer;
+
+    public float repeatRate = 1f;
+
     private Vector2 bulletMoveDirection;
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("Fire", 0f, 2f);
+        InvokeRepeating("Fire", 0f, repeatRate);
     }
 
     private void Fire()
@@ -35,9 +39,14 @@ public class FireBullets : MonoBehaviour
             bul.transform.position = transform.position;
             bul.transform.rotation = transform.rotation;
             bul.SetActive(true);
-           // bul.GetComponent<StarBullet>().SetMoveDirection(bulDir); //TODO FIX
+            bul.GetComponent<StarBullet>().SetMoveDirection(bulDir); //TODO FIX
             angle += angleStep;
         }
     }
+
+    
+    
+       
+    
 
 }

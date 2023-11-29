@@ -857,7 +857,7 @@ GameObject:
   - component: {fileID: 1402741474}
   - component: {fileID: 1402741473}
   - component: {fileID: 1402741472}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Capsule
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1130,8 +1130,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
+  empRadius: 1.25
+  empForce: 10
   groundDetection: {fileID: 128682244}
-  wallDetection: {fileID: 0}
 --- !u!61 &1782067795
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1654,8 +1655,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
+  empRadius: 1.25
+  empForce: 10
   groundDetection: {fileID: 887398885}
-  wallDetection: {fileID: 0}
 --- !u!114 &2140619644
 MonoBehaviour:
   m_ObjectHideFlags: 0

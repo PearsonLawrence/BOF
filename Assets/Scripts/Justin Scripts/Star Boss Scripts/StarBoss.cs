@@ -5,13 +5,14 @@ using UnityEngine;
 public class StarBoss : MonoBehaviour
 {
 
-    private float moveSpeed;
+    public float moveSpeed = 5f;
     private bool moveRight;
+    public float rotationSpeed = 30f;
 
     // Start is called before the first frame update
     void Start()
     {
-        moveSpeed = 2f;
+        moveRight = true;
         moveRight = true;
     }
 
@@ -37,5 +38,7 @@ public class StarBoss : MonoBehaviour
         {
             transform.position = new Vector2(transform.position.x - moveSpeed * Time.deltaTime, transform.position.y);
         }
+
+        transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
     }
 }

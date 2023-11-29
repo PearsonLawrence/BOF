@@ -15,7 +15,7 @@ public class StarBullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        moveSpeed = 10f;
+        moveSpeed = 5f;
     }
 
     // Update is called once per frame
@@ -31,11 +31,22 @@ public class StarBullet : MonoBehaviour
 
     private void SelfDestruct()
     {
+
         gameObject.SetActive(false);
+        
     }
 
     private void OnDisable()
     {
         CancelInvoke();
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
 }
