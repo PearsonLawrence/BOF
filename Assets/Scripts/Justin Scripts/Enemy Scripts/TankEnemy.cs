@@ -5,15 +5,16 @@ using UnityEngine;
 public class TankEnemy : MonoBehaviour
 {
     public float speed;
-    public float empRadius = 5f;
-    public float empForce = 10f;
+    public float reflectProjectileSpeed = 5f;
+    public LayerMask reflectableLayer;
+    
 
     private bool movingRight = true;
     public Transform groundDetection;
 
     private void Start()
     {
-        TriggerEmpPulse();
+        
     }
 
 
@@ -23,11 +24,11 @@ public class TankEnemy : MonoBehaviour
         transform.Translate(Vector2.right * speed * Time.deltaTime);
 
         RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, 2f);
-        
+
 
         if (groundInfo.collider == false)
         {
-            if(movingRight == true)
+            if (movingRight == true)
             {
                 transform.eulerAngles = new Vector3(0, -180, 0);
                 movingRight = false;
@@ -38,12 +39,7 @@ public class TankEnemy : MonoBehaviour
                 transform.eulerAngles = new Vector3(0, 0, 0);
                 movingRight = true;
             }
-
-            
-            
         }
-
-      
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -53,34 +49,30 @@ public class TankEnemy : MonoBehaviour
         }
     }
 
-    private void TriggerEmpPulse()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("EMP Pulse triggered.");
-        
-        
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, empRadius);
-
-        foreach (Collider2D collider in colliders)
+        if((reflectableLayer.value & 1 << other.gameObject.layer) != 0)
         {
-            if (collider.gameObject.CompareTag("Player"))
-            {
-                Debug.Log("Player Detected!");
-                Rigidbody2D rb = collider.gameObject.GetComponent<Rigidbody2D>();
+            Rigidbody2D projectileRb = other.GetComponent<Rigidbody2D>();
 
-                if (rb != null)
-                {
-                    Vector2 empDirection = (collider.transform.position - transform.position).normalized;
-                    rb.AddForce(empDirection * empForce, ForceMode2D.Impulse);
-                }
+            if (projectileRb != null)
+            {
+                ReflectProjectile(projectileRb);
             }
         }
     }
 
-    private void OnDrawGizmosSelected()
+    private void ReflectProjectile(Rigidbody2D projectileRb)
     {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, empRadius);
+        Vector2 reflectedVelocity = -projectileRb.velocity;
+
+        projectileRb.velocity = reflectedVelocity.normalized * reflectProjectileSpeed;
     }
+
+
+
+
+
 
 
 
