@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Title Screen.unity
+    path: Assets/Scenes/Colin Scenes/Title Screen.unity
     guid: 1e40248dc99e8704886baaf788fa8782
   - enabled: 1
-    path: Assets/Level Select.unity
+    path: Assets/Scenes/Colin Scenes/Level Select.unity
     guid: b62df81575afb4147bcc6371a81be82e
   m_configObjects: {}
