@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8408617649595712856}
   - component: {fileID: -7678762987877146190}
   m_Layer: 7
-  m_Name: Hexagon Flat-Top
+  m_Name: PlayerProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -5,8 +5,8 @@ using UnityEngine;
 public class TankEnemy : MonoBehaviour
 {
     public float speed;
-    public float reflectProjectileSpeed = 5f;
-    public LayerMask reflectableLayer;
+    public float knockbackForce = 5f;
+    //public LayerMask reflectableLayer;
     
 
     private bool movingRight = true;
@@ -49,31 +49,28 @@ public class TankEnemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if((reflectableLayer.value & 1 << other.gameObject.layer) != 0)
-        {
-            Rigidbody2D projectileRb = other.GetComponent<Rigidbody2D>();
 
-            if (projectileRb != null)
-            {
-                ReflectProjectile(projectileRb);
-            }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // Calculate knockback direction
+            Vector2 knockbackDirection = (collision.transform.position - transform.position).normalized;
+
+            // Apply force to the player
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+            Debug.Log("Player knocked back!");
         }
     }
-
-    private void ReflectProjectile(Rigidbody2D projectileRb)
-    {
-        Vector2 reflectedVelocity = -projectileRb.velocity;
-
-        projectileRb.velocity = reflectedVelocity.normalized * reflectProjectileSpeed;
-    }
-
-
-
-
-
 
 
 
 }
+
+
+
+
+
+
+
+
