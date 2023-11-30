@@ -17,14 +17,14 @@ public class PlayerCombatComponent : MonoBehaviour
     public collisionDamageComponent Hand1, Hand2;
     public float buffTime;
 
-    private PowerupTypes currentPowerupType;
+    private EnemyType currentPowerupType;
     public TMP_Text buffText;
 
-    public void SetCurrentPowerupType(PowerupTypes type)
+    public void SetCurrentPowerupType(EnemyType type)
     {
         currentPowerupType = type;
     }
-    public PowerupTypes GetCurrentPowerupType()
+    public EnemyType GetCurrentPowerupType()
     {
         return currentPowerupType;
     }

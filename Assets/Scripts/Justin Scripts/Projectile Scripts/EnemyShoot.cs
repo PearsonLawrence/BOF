@@ -6,30 +6,62 @@ public class EnemyShoot : MonoBehaviour
 {
     public GameObject projectile;
     public Transform projectilePos;
+    public float shootForce;
+    [SerializeField] private TankEnemy mainBodyTank;
+    private FlyingEnemy mainBodyFlying;
+    [SerializeField] private GameObject enemyPlayer;
 
+    [SerializeField] EnemyType enemyType;
 
+    [SerializeField] private float distanceToShoot; 
     private float timer;
     // Start is called before the first frame update
     void Start()
     {
-
+       switch(enemyType)
+        {
+            case EnemyType.Square:
+                mainBodyTank = GetComponent<TankEnemy>();
+                enemyPlayer = mainBodyTank.Player;
+                break;
+            case EnemyType.Circle:
+                mainBodyFlying = GetComponent<FlyingEnemy>();
+                enemyPlayer = mainBodyFlying.Player;
+                break;
+        }
     }
-
+    private float currentDistToPlayer;
     // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
 
-        if (timer > 1.5)
+
+        currentDistToPlayer = Vector3.Distance(transform.position, enemyPlayer.transform.position);
+               
+
+
+        if (timer > 1.5 && currentDistToPlayer < distanceToShoot)
         {
-            timer = 0;
-            shoot();
+            Vector3 rayDir = enemyPlayer.transform.position - projectilePos.position;
+
+            RaycastHit2D PlayerAimRay = Physics2D.Raycast(projectilePos.position, rayDir, 10000);
+            if (PlayerAimRay.collider.CompareTag("Player"))
+            {
+                timer = 0;
+                shoot();
+
+            }
         }
     }
 
     void shoot()
     {
-        Instantiate(projectile, projectilePos.position, Quaternion.identity);
+        GameObject temp = Instantiate(projectile, projectilePos.position, Quaternion.identity);
+        Rigidbody2D temp_rb = temp.GetComponent<Rigidbody2D>();
+
+        Vector3 direction = enemyPlayer.transform.position - transform.position;
+        temp_rb.velocity = new Vector2(direction.x, direction.y).normalized * shootForce;
     }
 
 }

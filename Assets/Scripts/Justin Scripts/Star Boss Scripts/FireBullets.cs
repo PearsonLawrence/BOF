@@ -15,14 +15,27 @@ public class FireBullets : MonoBehaviour
 
     public float repeatRate = 1f;
 
-    private Vector2 bulletMoveDirection;
-    // Start is called before the first frame update
-    void Start()
-    {
-        InvokeRepeating("Fire", 0f, repeatRate);
-    }
+    [SerializeField] float launchSpeed;
 
-    private void Fire()
+    private Vector2 bulletMoveDirection;
+
+    private HealthComponent health;
+    [SerializeField] private StarBoss boss;
+    // Start is called before the first frame update
+    private void Awake()
+    {
+        health = GetComponent<HealthComponent>();
+        boss = GetComponent<StarBoss>();
+    }
+    public void StartFireRepetition(float rate)
+    {
+        InvokeRepeating("doFire", 0f, rate);
+    }
+    private void doFire()
+    {
+        boss.anim.SetBool("isShooting", true);
+    }
+    public void Fire()
     {
         float angleStep = (endAngle - startAngle) / bulletsAmount;
         float angle = startAngle;
@@ -39,9 +52,11 @@ public class FireBullets : MonoBehaviour
             bul.transform.position = transform.position;
             bul.transform.rotation = transform.rotation;
             bul.SetActive(true);
-            bul.GetComponent<StarBullet>().SetMoveDirection(bulDir); //TODO FIX
+            bul.GetComponent<Rigidbody2D>().velocity = (bulDir * launchSpeed);
+            bul.GetComponent<collisionDamageComponent>().owner = health;
             angle += angleStep;
         }
+        boss.anim.SetBool("isShooting", false);
     }
 
     

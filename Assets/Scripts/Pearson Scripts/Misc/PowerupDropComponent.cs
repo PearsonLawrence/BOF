@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PowerupTypes
+public enum EnemyType
 {
     Circle,
     Square,
@@ -11,7 +11,7 @@ public enum PowerupTypes
 
 public class PowerupDropComponent : MonoBehaviour
 {
-    [SerializeField] PowerupTypes type;
+    [SerializeField] EnemyType type;
     [SerializeField] float buffTime;
     private void OnCollisionEnter2D(Collision2D collision)
     {

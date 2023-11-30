@@ -14,29 +14,6 @@ public class EnemyBulletScript : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("Player");
-
-        Vector3 direction = player.transform.position - transform.position;
-        rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        timer += Time.deltaTime;
-
-        if(timer > 10)
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D collide)
-    {
-        if (collide.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("Bullet hit player.");
-            Destroy(gameObject);
-        }
-    }
 }

@@ -11,34 +11,35 @@ public class TankEnemy : MonoBehaviour
 
     private bool movingRight = true;
     public Transform groundDetection;
+    public Transform groundDetection2;
+    public Rigidbody2D rb;
+    public GameObject Player;
 
-    private void Start()
+    private void Awake()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
+        Player = GameObject.FindGameObjectWithTag("Player");
     }
+    [SerializeField]
+    private float RayDist = .5f;
 
-
+    public Vector2 dir = Vector2.right;
     // Update is called once per frame
     void Update() // add wall detection after alpha
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        rb.velocity = new Vector2(dir.x * speed * Time.deltaTime, rb.velocity.y);
 
-        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, 2f);
+        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, RayDist);
+        RaycastHit2D groundInfo2 = Physics2D.Raycast(groundDetection2.position, Vector2.down, RayDist);
 
 
-        if (groundInfo.collider == false)
+        if (!groundInfo.collider && groundInfo2.collider)
         {
-            if (movingRight == true)
-            {
-                transform.eulerAngles = new Vector3(0, -180, 0);
-                movingRight = false;
-            }
-
-            else
-            {
-                transform.eulerAngles = new Vector3(0, 0, 0);
-                movingRight = true;
-            }
+            dir = -Vector2.right;
+        }
+        else if(groundInfo.collider && !groundInfo2.collider)
+        {
+            dir = Vector2.right;
         }
     }
     private void OnCollisionStay2D(Collision2D collision)

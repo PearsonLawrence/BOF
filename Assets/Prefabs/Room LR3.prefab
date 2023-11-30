@@ -1185,6 +1185,7 @@ GameObject:
   - component: {fileID: 8518735660606878638}
   - component: {fileID: 498892865166777367}
   - component: {fileID: 6535302445107378057}
+  - component: {fileID: 298049158840214612}
   m_Layer: 9
   m_Name: Room LR3
   m_TagString: Untagged
@@ -1281,7 +1282,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1295,8 +1296,22 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
+--- !u!114 &298049158840214612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7314777658839148013}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d68a88c25484e4ab414b944b9559f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 10
+  boxCollider: {fileID: 6535302445107378057}
 --- !u!1 &7840554622431566400
 GameObject:
   m_ObjectHideFlags: 0

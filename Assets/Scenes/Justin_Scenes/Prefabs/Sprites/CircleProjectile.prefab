@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 7429599947435354471}
   - component: {fileID: 358019381393080130}
   - component: {fileID: 4352799042719532881}
-  - component: {fileID: 524318435143693826}
   - component: {fileID: 822988211078589343}
+  - component: {fileID: -7720862976194665223}
   m_Layer: 0
   m_Name: CircleProjectile
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,19 +114,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &524318435143693826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 683138490325392874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a652522437f80c49b7aa2bf7a45d896, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  force: 5
 --- !u!58 &822988211078589343
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -162,3 +149,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &-7720862976194665223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683138490325392874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cee9b18b6687d92479d6f337cebb713c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 0}
+  regularDamage: 5
+  heavyDamage: 0
+  buffedDamage: 0
+  currentDamage: 5
+  isDestroyedOnHit: 1
+  isAttacking: 1

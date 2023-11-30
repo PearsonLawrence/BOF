@@ -8,45 +8,38 @@ public class StarTeleport : MonoBehaviour
 
     public float teleportRange;
     public float teleportInterval;
-    public float maxYBound = 4f;
-    public float maxXBound = 10f;
-    public float minYBound = -4f;
-    public float minXBound = -10f;
-    
-    
+    public float Bound = 10f;
+
+    private Vector3 StartPos;
+    [SerializeField] private StarBoss boss;
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(TeleportRoutine());
+        StartPos = transform.position;
+        boss = GetComponent<StarBoss>();
+
     }
 
 
-    IEnumerator TeleportRoutine()
+    public IEnumerator TeleportRoutine()
     {
+        bool temp = (boss != null && boss.isFighting);
         while (true)
         {
             yield return new WaitForSeconds(teleportInterval);
 
-            Teleport();
+            boss.anim.SetBool("isTeleporting", true);
         }
     }
 
-    void Teleport()
+    public void Teleport()
     {
-        
-        
         Vector3 randomPosition = GetRandomPosition();
 
-        // Clamp the x and z coordinates within bounds
-        //float clampedX = Mathf.Clamp(randomPosition.x, minBounds.x, maxBounds.x);
-        //float clampedZ = Mathf.Clamp(randomPosition.z, minBounds.y, maxBounds.y);
+        transform.position = new Vector3(Random.Range(StartPos.x - Bound, StartPos.x + Bound), Random.Range(StartPos.y - Bound, StartPos.y + Bound), 0f);
 
-        // Apply the clamped position
-        transform.position = new Vector3(Random.Range(minXBound, maxXBound), Random.Range(minYBound, maxYBound), 0f);
 
-        //transform.position = new Vector3(randomPosition.x, randomPosition.y, randomPosition.z);
-
-        Debug.Log("Enemy teleported to: " + transform.position);
+        boss.anim.SetBool("isTeleporting", false);
     }
 
     Vector3 GetRandomPosition()
@@ -56,9 +49,5 @@ public class StarTeleport : MonoBehaviour
 
         return randomPosition;
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 }

@@ -7,6 +7,8 @@ TagManager:
   - Platform
   - Ground
   - Enemy
+  - Boss
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -20,8 +22,6 @@ TagManager:
   - Reflect
   - 
   - Room
-  - 
-  - 
   - 
   - 
   - 
