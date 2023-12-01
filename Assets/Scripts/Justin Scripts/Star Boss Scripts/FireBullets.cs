@@ -21,6 +21,7 @@ public class FireBullets : MonoBehaviour
 
     private HealthComponent health;
     [SerializeField] private StarBoss boss;
+    [SerializeField] private GameObject sfxPrefab;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -47,6 +48,9 @@ public class FireBullets : MonoBehaviour
 
             Vector3 bulMoveVector = new Vector3(bulDirX, bulDirY, 0f);
             Vector2 bulDir = (bulMoveVector - transform.position).normalized;
+
+
+            if (sfxPrefab != null) Instantiate(sfxPrefab, transform.position, Quaternion.identity);
 
             GameObject bul = StarBulletPool.bulletPoolInstance.GetBullet();
             bul.transform.position = transform.position;

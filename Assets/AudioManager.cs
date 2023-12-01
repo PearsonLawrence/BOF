@@ -2,6 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SoundType
+{
+    background,
+    powerup,
+    shoot,
+    bossShoot,
+    takeDamage,
+    playerMelee,
+    enemyMelee
+}
+
 public class AudioManager : MonoBehaviour
 {
     [Header("Audio Source")] 
@@ -12,9 +23,11 @@ public class AudioManager : MonoBehaviour
     public AudioClip background;
     public AudioClip powerup;
     public AudioClip shoot;
+    public AudioClip bossShoot;
     public AudioClip takeDamage;
+    public AudioClip playerMelee;
+    public AudioClip enemyMelee;
 
-    
     //to add SFX
     //create AudioManager object
     //call PlaySFX with correct sound clip
@@ -24,8 +37,29 @@ public class AudioManager : MonoBehaviour
         musicSource.Play();
     }
 
-    public void PlaySFX(AudioClip clip)
+    public void PlaySFX(SoundType type)
     {
-        SFXSource.PlayOneShot(clip);
+        
+        switch (type)
+        {
+            case SoundType.takeDamage:
+                SFXSource.PlayOneShot(takeDamage);
+                break;
+            case SoundType.powerup:
+                SFXSource.PlayOneShot(powerup);
+                break;
+            case SoundType.playerMelee:
+                SFXSource.PlayOneShot(playerMelee);
+                break;
+            case SoundType.enemyMelee:
+                SFXSource.PlayOneShot(enemyMelee);
+                break;
+            case SoundType.shoot:
+                SFXSource.PlayOneShot(shoot);
+                break;
+            case SoundType.bossShoot:
+                SFXSource.PlayOneShot(bossShoot);
+                break;
+        }
     }
 }

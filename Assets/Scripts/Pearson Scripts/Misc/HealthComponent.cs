@@ -26,6 +26,10 @@ public class HealthComponent : MonoBehaviour
 
     [SerializeField] private bool hasScore;
     [SerializeField] private int scoreValue;
+
+
+    [SerializeField] private AudioSource damageSFX;
+
     private PlayerScoreComponent score;
     public void Start()
     {
@@ -53,6 +57,7 @@ public class HealthComponent : MonoBehaviour
     {
         if(!canTakeDamage) return;
 
+        if (damageSFX != null) damageSFX.Play();
         currentHealth -= amount;
 
         if(camShake != null && currentHealth > 0)

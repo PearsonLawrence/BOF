@@ -162,4 +162,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  pickupEffect: {fileID: 0}
   buffTime: 10
+  sfx: {fileID: 7902183670846552880, guid: d87237f18ccae0f43be4a683ba8c44d2, type: 3}

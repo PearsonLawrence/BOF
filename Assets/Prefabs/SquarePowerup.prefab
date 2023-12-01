@@ -164,3 +164,4 @@ MonoBehaviour:
   type: 1
   pickupEffect: {fileID: 5951003907412422077, guid: 48e9fbd5d78159c41ad1a372c5418744, type: 3}
   buffTime: 10
+  sfx: {fileID: 7902183670846552880, guid: d87237f18ccae0f43be4a683ba8c44d2, type: 3}
