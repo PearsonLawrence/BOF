@@ -18,17 +18,9 @@ public class EnemyShoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       switch(enemyType)
-        {
-            case EnemyType.Square:
-                mainBodyTank = GetComponent<TankEnemy>();
-                enemyPlayer = mainBodyTank.Player;
-                break;
-            case EnemyType.Circle:
-                mainBodyFlying = GetComponent<FlyingEnemy>();
-                enemyPlayer = mainBodyFlying.Player;
-                break;
-        }
+           mainBodyFlying = GetComponent<FlyingEnemy>();
+           enemyPlayer = mainBodyFlying.Player;
+             
     }
     private float currentDistToPlayer;
     // Update is called once per frame
@@ -58,6 +50,7 @@ public class EnemyShoot : MonoBehaviour
     void shoot()
     {
         GameObject temp = Instantiate(projectile, projectilePos.position, Quaternion.identity);
+        temp.GetComponent<collisionDamageComponent>().owner = mainBodyFlying.GetHealthComponent();
         Rigidbody2D temp_rb = temp.GetComponent<Rigidbody2D>();
 
         Vector3 direction = enemyPlayer.transform.position - transform.position;

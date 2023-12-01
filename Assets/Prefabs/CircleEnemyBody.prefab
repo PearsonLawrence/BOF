@@ -212,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 50
   currentHealth: 50
+  canTakeDamage: 1
   camShake: {fileID: 0}
   damageAnimator: {fileID: 7685875819278882657}
   deathParticlePrefab: {fileID: 5951003907412422077, guid: 48e9fbd5d78159c41ad1a372c5418744, type: 3}
@@ -219,6 +220,8 @@ MonoBehaviour:
   isPlayerHealth: 0
   canDropPowerup: 1
   healthBar: {fileID: 0}
+  hasScore: 1
+  scoreValue: 5
 --- !u!58 &8471421892699296351
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -304,6 +307,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   avoidanceDistance: 2
+  HC: {fileID: 0}
 --- !u!114 &3381519161815978990
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ public class PlayerCombatComponent : MonoBehaviour
     private Vector3 mousePos;
     public Animator anim;
     public collisionDamageComponent Hand1, Hand2;
+    [SerializeField] HealthComponent HC;
     public float buffTime;
 
     private EnemyType currentPowerupType;
@@ -22,6 +23,7 @@ public class PlayerCombatComponent : MonoBehaviour
 
     public void SetCurrentPowerupType(EnemyType type)
     {
+        ResetBuff();
         currentPowerupType = type;
     }
     public EnemyType GetCurrentPowerupType()
@@ -89,20 +91,38 @@ public class PlayerCombatComponent : MonoBehaviour
         {
             transform.up = player.transform.up;
         }
-
+        
         if(buffTime <= 0)
         {
-            Hand1.currentDamage = Hand1.regularDamage;
-            Hand2.currentDamage = Hand2.regularDamage;
+            ResetBuff();
         }
         else
         {
-            Hand1.currentDamage = Hand1.buffedDamage;
-            Hand2.currentDamage = Hand2.buffedDamage;
+            doPowerUp(currentPowerupType);
         }
 
         isMoving = (player.Horz != 0);
         anim.SetBool("isMoving", isMoving);
         
+    }
+    public void doPowerUp(EnemyType type)
+    {
+        switch (type)
+        {
+            case EnemyType.Circle:
+                Hand1.currentDamage = Hand1.buffedDamage;
+                Hand2.currentDamage = Hand2.buffedDamage;
+                break;
+            case EnemyType.Square:
+                HC.canTakeDamage = false;
+                break;
+        }
+    }
+    public void ResetBuff()
+    {
+        Hand1.currentDamage = Hand1.regularDamage;
+        Hand2.currentDamage = Hand2.regularDamage;
+        HC.canTakeDamage = true;
+
     }
 }

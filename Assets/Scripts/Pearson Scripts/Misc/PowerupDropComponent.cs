@@ -12,6 +12,7 @@ public enum EnemyType
 public class PowerupDropComponent : MonoBehaviour
 {
     [SerializeField] EnemyType type;
+    [SerializeField] private GameObject pickupEffect;
     [SerializeField] float buffTime;
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -20,6 +21,7 @@ public class PowerupDropComponent : MonoBehaviour
             PlayerCombatComponent combat = collision.gameObject.GetComponent<PlayerInputController>().GetPlayerCombatComponent();
             if (combat == null) return;
 
+            if (pickupEffect != null) Instantiate(pickupEffect, transform.position, Quaternion.identity);
 
             combat.SetCurrentPowerupType(type);
             combat.buffTime = buffTime;

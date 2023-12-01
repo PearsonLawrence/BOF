@@ -14,6 +14,7 @@ public class FlyingEnemy : MonoBehaviour
     private float circularMotionAngle = 0f;
     public LayerMask obstacleLayer;
     public float avoidanceDistance = 1f;
+    [SerializeField] private HealthComponent HC;
 
     Ray ray;
     
@@ -23,6 +24,7 @@ public class FlyingEnemy : MonoBehaviour
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         startingPoint = transform;
+        HC = GetComponent<HealthComponent>();
     }
 
     // Update is called once per frame
@@ -56,7 +58,10 @@ public class FlyingEnemy : MonoBehaviour
             
 
     }
-
+    public HealthComponent GetHealthComponent()
+    {
+        return HC;
+    }
     private void Chase()
     {
 

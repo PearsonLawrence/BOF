@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5234691654386233077}
   - component: {fileID: 2544647184686079748}
   m_Layer: 0
-  m_Name: CirclePowerup
+  m_Name: SquarePowerup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.4481132, b: 0.4481132, a: 1}
+  m_Sprite: {fileID: 7482667652216324306, guid: 1b87861fff29fac40841aad71d5e712f, type: 3}
+  m_Color: {r: 0.2688679, g: 1, b: 0.39063704, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -161,5 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43073d47584d954fa150c4afa2fcbda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
+  pickupEffect: {fileID: 5951003907412422077, guid: 48e9fbd5d78159c41ad1a372c5418744, type: 3}
   buffTime: 10
