@@ -190,6 +190,8 @@ Transform:
   - {fileID: 6905187812809366484}
   - {fileID: 5825951768613625106}
   - {fileID: 7219587199619265265}
+  - {fileID: 3693908478210991616}
+  - {fileID: 2344609631509894082}
   - {fileID: 9147342660187665461}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -633,6 +635,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objects:
   - {fileID: 8328090808203031180, guid: 55e294b1809d3dc41aeb1b963420194d, type: 3}
+--- !u!1 &4606406459846054920
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2344609631509894082}
+  - component: {fileID: 5283357312377609293}
+  m_Layer: 0
+  m_Name: Spawn Point (30)
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2344609631509894082
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4606406459846054920}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.63, y: -1.86, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3808785993471744900}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5283357312377609293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4606406459846054920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26721700616312e479c1818d4a4ac3be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objects:
+  - {fileID: 2448008674280785165, guid: 2d6883f1929d3df428efcc8812806339, type: 3}
+  - {fileID: 3547698698627007548, guid: ac821a15fc2b3cd46b2468fc0784922e, type: 3}
+  - {fileID: 8328090808203031180, guid: 55e294b1809d3dc41aeb1b963420194d, type: 3}
 --- !u!1 &5568998996834969709
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,6 +912,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objects:
+  - {fileID: 8328090808203031180, guid: 55e294b1809d3dc41aeb1b963420194d, type: 3}
+--- !u!1 &8016608368197404015
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3693908478210991616}
+  - component: {fileID: 9118949504486148353}
+  m_Layer: 0
+  m_Name: Spawn Point (29)
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3693908478210991616
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016608368197404015}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.83, y: -2.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3808785993471744900}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9118949504486148353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016608368197404015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26721700616312e479c1818d4a4ac3be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objects:
+  - {fileID: 2448008674280785165, guid: 2d6883f1929d3df428efcc8812806339, type: 3}
+  - {fileID: 3547698698627007548, guid: ac821a15fc2b3cd46b2468fc0784922e, type: 3}
   - {fileID: 8328090808203031180, guid: 55e294b1809d3dc41aeb1b963420194d, type: 3}
 --- !u!1 &8061802529510986512
 GameObject:

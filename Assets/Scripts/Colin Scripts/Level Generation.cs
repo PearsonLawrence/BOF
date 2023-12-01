@@ -7,7 +7,7 @@ public class LevelGeneration : MonoBehaviour
 
     public Transform[] startingPositions;
     public GameObject[] rooms; // index 0 --> LR, index 1 --> LRB, index 2 --> LRT, index 3 --> LRBT
-    public GameObject CurrentRoom;
+    public Transform CurrentRoom;
     private int direction;
     public float moveAmount;
 
@@ -30,8 +30,9 @@ public class LevelGeneration : MonoBehaviour
     {
         int randStartingPos = Random.Range(0, startingPositions.Length);
         transform.position = startingPositions[randStartingPos].position;
-        CurrentRoom = Instantiate(rooms[0], transform.position, Quaternion.identity);
-        FirstRoom = CurrentRoom;
+        GameObject tempRoom = Instantiate(rooms[4], transform.position, Quaternion.identity);
+        CurrentRoom = tempRoom.transform;
+        FirstRoom = CurrentRoom.gameObject;
 
         direction = Random.Range(1, 6);
     }
@@ -46,9 +47,11 @@ public class LevelGeneration : MonoBehaviour
                 Vector2 newPos = new Vector2(transform.position.x + moveAmount, transform.position.y);
                 transform.position = newPos;
 
-                int rand = Random.Range(1, 4);
-                CurrentRoom = Instantiate(rooms[rand], transform.position, Quaternion.identity);
+                int rand = Random.Range(0, 3);
+                if (rand == 4) rand = Random.Range(0, 3);
 
+                GameObject tempRoom = Instantiate(rooms[rand], transform.position, Quaternion.identity);
+                CurrentRoom = tempRoom.transform;
                 direction = Random.Range(1, 6);
                 if (direction == 3)
                 {
@@ -72,9 +75,11 @@ public class LevelGeneration : MonoBehaviour
                 Vector2 newPos = new Vector2(transform.position.x - moveAmount, transform.position.y);
                 transform.position = newPos;
 
-                int rand = Random.Range(1, 4);
-                CurrentRoom = Instantiate(rooms[rand], transform.position, Quaternion.identity);
+                int rand = Random.Range(0, 3);
+                if (rand == 4) rand = Random.Range(0, 3);
 
+                GameObject tempRoom = Instantiate(rooms[rand], transform.position, Quaternion.identity);
+                CurrentRoom = tempRoom.transform;
                 direction = Random.Range(3, 6);
             }
             else
@@ -97,37 +102,43 @@ public class LevelGeneration : MonoBehaviour
                     if (downCounter >= 2)
                     {
                         roomDetection.GetComponent<RoomType>().RoomDestruction();
-                        CurrentRoom = Instantiate(rooms[3], transform.position, Quaternion.identity);
+                        GameObject tempRoom1 = Instantiate(rooms[3], transform.position, Quaternion.identity);
+                        CurrentRoom = tempRoom1.transform;
                     }
                     else
                     {
 
                         roomDetection.GetComponent<RoomType>().RoomDestruction();
 
-                        int randBottomRoom = Random.Range(2, 4);
+                        int randBottomRoom = Random.Range(1, 3);
+                        if(randBottomRoom == 4) randBottomRoom = Random.Range(1, 3);
+
                         if (randBottomRoom == 2)
                         {
                             randBottomRoom = 1;
                         }
-                        CurrentRoom = Instantiate(rooms[randBottomRoom], transform.position, Quaternion.identity);
+                        GameObject tempRoom2 = Instantiate(rooms[randBottomRoom], transform.position, Quaternion.identity);
+                        CurrentRoom = tempRoom2.transform;
                     }
                 }
 
                 Vector2 newPos = new Vector2(transform.position.x, transform.position.y - moveAmount);
                 transform.position = newPos;
 
-                int rand = Random.Range(3, 4);
-                CurrentRoom = Instantiate(rooms[rand], transform.position, Quaternion.identity);
-
+                int rand = Random.Range(2, 3);
+                GameObject tempRoom3 = Instantiate(rooms[rand], transform.position, Quaternion.identity);
+                CurrentRoom = tempRoom3.transform;
                 direction = Random.Range(1, 6);
             }
             else //stop level generation
             {
                 if(!isFinalRoomCreated)
                 {
+                    Debug.Log("LOOOK HERE !!!!!!!!!!!!!!!!!!!!");
                     Transform tempPos = CurrentRoom.transform;
-                    Destroy(CurrentRoom);
-                    Instantiate(rooms[5], tempPos.position, Quaternion.identity);
+                    Destroy(CurrentRoom.gameObject);
+                    GameObject tempRoom4 = Instantiate(rooms[5], tempPos.position, Quaternion.identity);
+                    CurrentRoom = tempRoom4.transform;
                     isFinalRoomCreated = true;
                 }
                 stopGeneration = true;
