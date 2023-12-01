@@ -13,6 +13,10 @@ public class PlayerInputController : MonoBehaviour
     [SerializeField]
     private PhysicsJump physicsJump;
 
+    [SerializeField] private PauseMenu pauseMenu;
+
+    public bool playerIsPlaying = false;
+
     private Rigidbody2D rb;
 
     public float MinSlow = 0.01f;
@@ -39,14 +43,22 @@ public class PlayerInputController : MonoBehaviour
 
     private void Update()
     {
-        HandleMovementInput();
-        HandleTimeControl();
-        HandleJumpInput();
-
-        if(Input.GetMouseButtonDown(0))
+        if(playerIsPlaying)
         {
-            playerCombat.doAttack();
+            HandleMovementInput();
+            HandleTimeControl();
+            HandleJumpInput();
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                playerCombat.doAttack();
+            }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                pauseMenu.Pause();
+            }
         }
+       
     }
 
     private void HandleMovementInput()

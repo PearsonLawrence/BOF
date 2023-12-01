@@ -24,13 +24,14 @@ public class LevelGeneration : MonoBehaviour
 
     private int downCounter;
     private bool isFinalRoomCreated = false;
+    public GameObject FirstRoom;
     // Start is called before the first frame update
     void Start()
     {
         int randStartingPos = Random.Range(0, startingPositions.Length);
         transform.position = startingPositions[randStartingPos].position;
         CurrentRoom = Instantiate(rooms[0], transform.position, Quaternion.identity);
-
+        FirstRoom = CurrentRoom;
 
         direction = Random.Range(1, 6);
     }
@@ -45,7 +46,7 @@ public class LevelGeneration : MonoBehaviour
                 Vector2 newPos = new Vector2(transform.position.x + moveAmount, transform.position.y);
                 transform.position = newPos;
 
-                int rand = Random.Range(0, 3);
+                int rand = Random.Range(1, 4);
                 CurrentRoom = Instantiate(rooms[rand], transform.position, Quaternion.identity);
 
                 direction = Random.Range(1, 6);
@@ -71,7 +72,7 @@ public class LevelGeneration : MonoBehaviour
                 Vector2 newPos = new Vector2(transform.position.x - moveAmount, transform.position.y);
                 transform.position = newPos;
 
-                int rand = Random.Range(0, 3);
+                int rand = Random.Range(1, 4);
                 CurrentRoom = Instantiate(rooms[rand], transform.position, Quaternion.identity);
 
                 direction = Random.Range(3, 6);
@@ -103,7 +104,7 @@ public class LevelGeneration : MonoBehaviour
 
                         roomDetection.GetComponent<RoomType>().RoomDestruction();
 
-                        int randBottomRoom = Random.Range(1, 3);
+                        int randBottomRoom = Random.Range(2, 4);
                         if (randBottomRoom == 2)
                         {
                             randBottomRoom = 1;
@@ -115,7 +116,7 @@ public class LevelGeneration : MonoBehaviour
                 Vector2 newPos = new Vector2(transform.position.x, transform.position.y - moveAmount);
                 transform.position = newPos;
 
-                int rand = Random.Range(2, 3);
+                int rand = Random.Range(3, 4);
                 CurrentRoom = Instantiate(rooms[rand], transform.position, Quaternion.identity);
 
                 direction = Random.Range(1, 6);
@@ -126,7 +127,7 @@ public class LevelGeneration : MonoBehaviour
                 {
                     Transform tempPos = CurrentRoom.transform;
                     Destroy(CurrentRoom);
-                    Instantiate(rooms[4], tempPos.position, Quaternion.identity);
+                    Instantiate(rooms[5], tempPos.position, Quaternion.identity);
                     isFinalRoomCreated = true;
                 }
                 stopGeneration = true;

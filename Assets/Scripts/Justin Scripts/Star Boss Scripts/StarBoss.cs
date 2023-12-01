@@ -23,6 +23,8 @@ public class StarBoss : MonoBehaviour
 
     public void InitiateBossFight()
     {
+
+        anim.SetBool("isTeleporting", true);
         StartCoroutine(TP.TeleportRoutine());
         fBullets.StartFireRepetition(fBullets.repeatRate);
         isFighting = true;

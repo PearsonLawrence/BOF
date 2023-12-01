@@ -431,6 +431,8 @@ MonoBehaviour:
   playerMovement: {fileID: 6427140894407870294}
   playerCombat: {fileID: 3215917752118631049}
   physicsJump: {fileID: 2897420636554034043}
+  pauseMenu: {fileID: 0}
+  playerIsPlaying: 0
   MinSlow: 0.25
   Speed: 100
   TempGravity: {x: 0, y: 0}
@@ -470,7 +472,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 94c28cc72291f8045a96742702bb85e8, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.758
   m_Pitch: 1
   Loop: 0
