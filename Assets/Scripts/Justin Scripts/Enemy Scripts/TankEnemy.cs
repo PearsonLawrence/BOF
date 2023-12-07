@@ -63,27 +63,8 @@ public class TankEnemy : MonoBehaviour
             dir = Vector2.right;
         }
     }
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;   
-        }
-    }
+    
 
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            // Calculate knockback direction
-            Vector2 knockbackDirection = (collision.transform.position - transform.position).normalized;
-
-            // Apply force to the player
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
-            Debug.Log("Player knocked back!");
-        }
-    }
 
 
 
