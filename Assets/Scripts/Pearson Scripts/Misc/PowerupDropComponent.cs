@@ -6,7 +6,8 @@ public enum EnemyType
 {
     Circle,
     Square,
-    Triangle
+    Triangle,
+    Boss
 }
 
 public class PowerupDropComponent : MonoBehaviour

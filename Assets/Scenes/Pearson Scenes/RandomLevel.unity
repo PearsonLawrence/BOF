@@ -2280,8 +2280,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8763087175360465490, guid: 4d737bce2ab97cc4c97f2c0e1ec154b3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7816365493765600256}
   m_SourcePrefab: {fileID: 100100000, guid: 4d737bce2ab97cc4c97f2c0e1ec154b3, type: 3}
+--- !u!1 &7816365493765600255 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8763087175360465490, guid: 4d737bce2ab97cc4c97f2c0e1ec154b3, type: 3}
+  m_PrefabInstance: {fileID: 7816365493765600254}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7816365493765600256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7816365493765600255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4363e6a528262634a9ef9c6d6bb95ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHC: {fileID: 0}
+  playerBulletPrefab: {fileID: 0}
+  maxBulletCollection: 0
+  shieldBulletDamage: 0
+  shieldDestroyDamage: 0
+  bulletLaunchVel: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -11,12 +11,16 @@ public class collisionDamageComponent : MonoBehaviour
     public bool isDestroyedOnHit;
     public bool isAttacking;
     public bool isKnockback;
+    [SerializeField] bool isPlayer;
+    [SerializeField] EnemyType bulletType;
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (!owner) return;
-        if (!isAttacking || owner.gameObject == collision.gameObject ||collision.gameObject.CompareTag("Bullet")) return;
-        
+        string tag = collision.gameObject.tag;
+        if (!isAttacking || owner.gameObject == collision.gameObject || tag == "Bullet" || tag == "PlayerHand") return;
+
         HealthComponent hc = collision.gameObject.GetComponent<HealthComponent>();
+        PlayerShieldComponent shield = collision.gameObject.GetComponent<PlayerShieldComponent>();
         if (hc)
         {
             if (hc != owner)
@@ -33,18 +37,15 @@ public class collisionDamageComponent : MonoBehaviour
                 }
             }
         }
-
+        else if (shield)
+            shield.addBulletToCollection(bulletType);
+        
         if (isDestroyedOnHit && owner)
         {
             if (owner.gameObject.CompareTag("Boss"))
-            {
-
                 this.gameObject.SetActive(false);
-            }
             else
-            {
                 Destroy(this.gameObject);
-            }
         }
         else if(isDestroyedOnHit)
             Destroy(this.gameObject);

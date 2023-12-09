@@ -15,6 +15,7 @@ public class PlayerCombatComponent : MonoBehaviour
     private Vector3 mousePos;
     public Animator anim;
     public collisionDamageComponent Hand1, Hand2;
+  //  [SerializeField] private 
     [SerializeField] HealthComponent HC;
     public float buffTime;
 
@@ -58,6 +59,10 @@ public class PlayerCombatComponent : MonoBehaviour
         }
     }
     public void doBlock()
+    {
+
+    }
+    public void doBlockShoot()
     {
 
     }
