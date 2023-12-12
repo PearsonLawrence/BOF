@@ -319,8 +319,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1510472658555799720, guid: 3c25bdf1f4b8cd14794409562fc28837, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1735753059}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8098060944453426161, guid: 3c25bdf1f4b8cd14794409562fc28837, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1799125855}
   m_SourcePrefab: {fileID: 100100000, guid: 3c25bdf1f4b8cd14794409562fc28837, type: 3}
 --- !u!1 &195355960
 GameObject:
@@ -1487,6 +1493,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1735753058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1735753059}
+  m_Layer: 0
+  m_Name: BombPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1735753059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735753058}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.74, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1799125854}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1799125849 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8098060944453426161, guid: 3c25bdf1f4b8cd14794409562fc28837, type: 3}
+  m_PrefabInstance: {fileID: 163615002}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1799125854 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1510472658555799720, guid: 3c25bdf1f4b8cd14794409562fc28837, type: 3}
+  m_PrefabInstance: {fileID: 163615002}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1799125855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799125849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08cff906f6cd5e0408888b16e0ba0894, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 3284086141903323396, guid: fab1403e12ff3b2468fc4f4ea20f8982, type: 3}
+  explosionPrefab: {fileID: 1590346799463799200, guid: 5f05de41d7b7bc345be0874fecbe7bc8, type: 3}
+  bombPos: {fileID: 1735753059}
+  shootInterval: 2
+  projectileSpeed: 5
+  explosionDelay: 2
+  explosionDuration: 1
 --- !u!1 &1832799446
 GameObject:
   m_ObjectHideFlags: 0
