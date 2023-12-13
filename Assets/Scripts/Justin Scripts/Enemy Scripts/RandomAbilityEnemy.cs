@@ -5,7 +5,7 @@ using UnityEngine;
 public class RandomAbilityEnemy : MonoBehaviour
 {
     // Start is called before the first frame update
-    public MonoBehaviour[] abilites;
+    public GameObject[] enemyAbilites;
     
     void Start()
     {
@@ -16,17 +16,29 @@ public class RandomAbilityEnemy : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        int randomIndex = Random.Range(0, abilites.Length);
-        MonoBehaviour selectedAbility = abilites[randomIndex];
+        int randomIndex = Random.Range(0, enemyAbilites.Length);
+        Debug.Log(randomIndex);
+        GameObject selectedEnemy = enemyAbilites[randomIndex];
+        
 
-        ApplyAbility(selectedAbility);
+        ApplyAbility(selectedEnemy);
     }
 
-    void ApplyAbility(MonoBehaviour ability)
+    void ApplyAbility(GameObject enemyWithAbility)
     {
-        if (ability != null)
+        if (enemyWithAbility != null)
         {
-            ability.enabled = true;
+            MonoBehaviour[] allScripts = enemyWithAbility.GetComponents<MonoBehaviour>();
+            foreach (var script in allScripts) 
+            {
+                script.enabled = false;
+            }
+
+            MonoBehaviour abilityScript = enemyWithAbility.GetComponent<MonoBehaviour>();
+            if (abilityScript != null)
+            {
+                abilityScript.enabled = true;
+            }
         }
 
     }

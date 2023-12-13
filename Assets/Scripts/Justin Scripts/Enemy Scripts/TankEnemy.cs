@@ -9,7 +9,7 @@ public class TankEnemy : MonoBehaviour
     //public LayerMask reflectableLayer;
     
 
-    private bool movingRight = true;
+    //private bool movingRight = true;
     public Transform groundDetection;
     public Transform groundDetection2;
     [SerializeField] private Animator anim;
@@ -36,7 +36,7 @@ public class TankEnemy : MonoBehaviour
         return anim;
     }
 
-    void Update() // add wall detection after alpha
+    void Update()
     {
         rb.velocity = new Vector2(dir.x * speed * Time.deltaTime, rb.velocity.y);
 
