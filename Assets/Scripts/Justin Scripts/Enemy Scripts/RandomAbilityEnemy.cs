@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RandomAbilityEnemy : MonoBehaviour
@@ -19,33 +20,36 @@ public class RandomAbilityEnemy : MonoBehaviour
     public float duplicateDuration = 5f;
     public float duplicateStoppingDistance = 2f;
     public float timeBetweenProjectiles = 2f;
-    
+
     [Header("Enemy Movement")]
-    public float speed = 5f;
-    public float triangleAmplitude = 2f;
-    private Vector2 initialPosition;
-    private float timeElapsed = 0f;
+    public float speed = 3f;
+    public float distanceBetween = 3f;
+    private float distance;
+    public GameObject player;
 
     private Transform playerTransform;
 
 
   
 
-    private void Start()
+    void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        initialPosition = transform.position;
         InvokeRepeating("RandomAbility", 2f, 5f);
     }
 
-    private void Update()
+    void Update()
     {
-        //movement
-        
-        /*timeElapsed += Time.deltaTime;
-        float xOffset = Mathf.Sin(timeElapsed * speed) * triangleAmplitude;
-        float yOffset = Mathf.Cos(timeElapsed * speed) * triangleAmplitude;
-        transform.position = initialPosition + new Vector2(xOffset, 0f); */
+        distance = Vector2.Distance(transform.position, player.transform.position);
+        Vector2 direction = player.transform.position - transform.position;
+        direction.Normalize();
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        if(distance < distanceBetween)
+        {
+            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
+            transform.rotation = Quaternion.Euler(Vector3.forward * angle);
+        }
     }
 
     void RandomAbility()

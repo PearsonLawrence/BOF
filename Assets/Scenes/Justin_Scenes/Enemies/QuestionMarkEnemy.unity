@@ -388,12 +388,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5297590508704629655, guid: 4d737bce2ab97cc4c97f2c0e1ec154b3, type: 3}
   m_PrefabInstance: {fileID: 2119040709}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 972677933}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b3bc1370e1763540aca3a6ae4bee1fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &972677933 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5695575715178914006, guid: 4d737bce2ab97cc4c97f2c0e1ec154b3, type: 3}
+  m_PrefabInstance: {fileID: 2119040709}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1067553167
 GameObject:
   m_ObjectHideFlags: 0
@@ -1166,6 +1171,18 @@ PrefabInstance:
     - target: {fileID: 4506471562290607414, guid: 2b88eb7a3fea1564ebc0bfe595a5a46a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6639667720405339883, guid: 2b88eb7a3fea1564ebc0bfe595a5a46a, type: 3}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6639667720405339883, guid: 2b88eb7a3fea1564ebc0bfe595a5a46a, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 972677933}
+    - target: {fileID: 6639667720405339883, guid: 2b88eb7a3fea1564ebc0bfe595a5a46a, type: 3}
+      propertyPath: distanceBetween
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7830964381024543463, guid: 2b88eb7a3fea1564ebc0bfe595a5a46a, type: 3}
       propertyPath: m_Name
