@@ -129,13 +129,13 @@ public class RandomAbilityEnemy : MonoBehaviour
         StartCoroutine(ShootProjectiles(duplicate));
     }
 
-    IEnumerator ShootProjectiles(GameObject duplicate)
+    IEnumerator ShootProjectiles(GameObject shooter)
     {
         while(true)
         {
-            GameObject projectile = Instantiate(projectilePrefab, projSpawnPoint.position, Quaternion.identity);
+            GameObject projectile = Instantiate(projectilePrefab, shooter.transform.position, Quaternion.identity);
             Rigidbody2D projRb = projectile.GetComponent<Rigidbody2D>();
-            projRb.velocity = (playerTransform.position - projSpawnPoint.position).normalized * projForce;
+            projRb.velocity = (playerTransform.position - projectile.transform.position).normalized * projForce;
 
             yield return new WaitForSeconds(timeBetweenProjectiles);
         }
