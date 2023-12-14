@@ -104,7 +104,7 @@ public class RandomAbilityEnemy : MonoBehaviour
 
         Destroy(pulseVisual, 0.5f);
         
-        
+        // need to apply damage to player
         
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, pulseRadius);
 
