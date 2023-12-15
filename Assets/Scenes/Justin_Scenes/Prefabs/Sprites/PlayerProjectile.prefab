@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3940492975389625465}
   - component: {fileID: 8140092163046831050}
-  - component: {fileID: 8408617649595712856}
   - component: {fileID: -7678762987877146190}
   m_Layer: 7
   m_Name: PlayerProjectile
@@ -86,21 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8408617649595712856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3284086141903323396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 058f59ecff2e2f946a54fb94936124af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileSpeed: 10
-  damage: 1
-  direction: {x: 0, y: 0}
 --- !u!50 &-7678762987877146190
 Rigidbody2D:
   serializedVersion: 4
@@ -109,7 +93,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3284086141903323396}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
