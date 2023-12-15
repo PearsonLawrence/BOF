@@ -1025,11 +1025,11 @@ MonoBehaviour:
   projectilePrefab: {fileID: 3284086141903323396, guid: fab1403e12ff3b2468fc4f4ea20f8982, type: 3}
   explosionPrefab: {fileID: 1590346799463799200, guid: 5f05de41d7b7bc345be0874fecbe7bc8, type: 3}
   bombPos: {fileID: 955531489}
-  shootInterval: 2
-  projectileSpeed: 5
+  shootInterval: 7
+  projectileSpeed: 7
   explosionDelay: 2
   explosionDuration: 1
-  projGravity: 1
+  projGravity: 3
 --- !u!1 &1147477274
 GameObject:
   m_ObjectHideFlags: 0
@@ -1430,11 +1430,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1780040379559441056, guid: 4d737bce2ab97cc4c97f2c0e1ec154b3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.661021
+      value: -4.97
       objectReference: {fileID: 0}
     - target: {fileID: 1780040379559441056, guid: 4d737bce2ab97cc4c97f2c0e1ec154b3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.0474095
+      value: -2.23
       objectReference: {fileID: 0}
     - target: {fileID: 1780040379559441056, guid: 4d737bce2ab97cc4c97f2c0e1ec154b3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1645,10 +1645,10 @@ MonoBehaviour:
   explosionPrefab: {fileID: 1590346799463799200, guid: 5f05de41d7b7bc345be0874fecbe7bc8, type: 3}
   bombPos: {fileID: 1735753059}
   shootInterval: 7
-  projectileSpeed: 5
+  projectileSpeed: 7
   explosionDelay: 2
   explosionDuration: 1
-  projGravity: 5
+  projGravity: 3
 --- !u!1 &1832799446
 GameObject:
   m_ObjectHideFlags: 0
@@ -2022,11 +2022,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1510472658555799720, guid: 3c25bdf1f4b8cd14794409562fc28837, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.3024
+      value: 5.48
       objectReference: {fileID: 0}
     - target: {fileID: 1510472658555799720, guid: 3c25bdf1f4b8cd14794409562fc28837, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.3677
+      value: -3.31
       objectReference: {fileID: 0}
     - target: {fileID: 1510472658555799720, guid: 3c25bdf1f4b8cd14794409562fc28837, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2067,6 +2067,10 @@ PrefabInstance:
     - target: {fileID: 9213091280670868271, guid: 3c25bdf1f4b8cd14794409562fc28837, type: 3}
       propertyPath: speed
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213091280670868271, guid: 3c25bdf1f4b8cd14794409562fc28837, type: 3}
+      propertyPath: zAxisAngle
+      value: 45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
