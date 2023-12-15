@@ -34,12 +34,18 @@ public class HealthComponent : MonoBehaviour
     public float spawnRadius = 1.5f;
     private PlayerScoreComponent score;
 
+    public Clock clock;
+    public GameManagerComponent manager;
+
     [SerializeField] private GameObject FluxionPartPrefab;
 
     public bool isDisableOnDeath;
     public bool isCrystal;
     public bool isCrystalBoss;
+    public bool isStarBoss;
     public DestroyableObject crystal;
+    public AudioManager audioman;
+    public GameObject audioPrefab;
     public void Start()
     {
         currentHealth = maxHealth;
@@ -49,6 +55,35 @@ public class HealthComponent : MonoBehaviour
             score = Camera.main.GetComponent<PlayerScoreComponent>();
         }
 
+        if (isCrystalBoss)
+        {
+            clock = GameObject.FindGameObjectWithTag("Clock").GetComponent<Clock>();
+            if (clock)
+            {
+                clock.updateTimeTrialInfo(this.gameObject);
+                manager = clock.gameObject.GetComponent<GameManagerComponent>();
+            }
+        }
+        if (isStarBoss)
+        {
+            manager = GameObject.FindGameObjectWithTag("Clock").GetComponent<GameManagerComponent>();
+            audioman = Camera.main.GetComponent<AudioManager>();
+        }
+
+        if (isPlayerHealth)
+        {
+            manager = GameObject.FindGameObjectWithTag("Clock").GetComponent<GameManagerComponent>();
+           
+        }
+    }
+    public void DestroyBoss()
+    {
+
+        if (deathParticlePrefab != null) Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
+
+        manager.starDeath();
+
+        this.gameObject.SetActive(false);
     }
     public Rigidbody2D getRBRef()
     {
@@ -74,9 +109,10 @@ public class HealthComponent : MonoBehaviour
         damageAnimator.SetBool("isTakeDamage", false);
        
     }
+    private bool bossDestroy;
     public void takeDamage(float amount)
     {
-        if(!canTakeDamage) return;
+        if(!canTakeDamage || bossDestroy) return;
 
         if (damageSFX != null) damageSFX.Play();
         currentHealth -= amount;
@@ -97,7 +133,7 @@ public class HealthComponent : MonoBehaviour
             healthBar.fillAmount = currentHealth / maxHealth;
             int rand = Random.Range(1, 100);
            
-            if (dropPrefab != null && rand > 30)
+            if (dropPrefab != null && rand > 50)
             {
                 float radius = spawnRadius;
                 Vector3 randomPos = Random.onUnitSphere * radius;
@@ -123,8 +159,17 @@ public class HealthComponent : MonoBehaviour
                     score.increaseScore(scoreValue);
                 }
             }
+            if (isStarBoss)
+            {
+                if (audioPrefab != null) Instantiate(audioPrefab, transform.position, Quaternion.identity);
 
-            if (deathParticlePrefab != null) Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
+                audioman.bossDead = true;
+
+                damageAnimator.SetBool("isDestroyBoss", true);
+                bossDestroy = true;
+                return;
+            }
+            if (deathParticlePrefab != null && !isStarBoss) Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
 
             if(canDropPowerup && dropPrefab != null)
                 Instantiate(dropPrefab, transform.position, Quaternion.identity);
@@ -138,7 +183,14 @@ public class HealthComponent : MonoBehaviour
 
             if(isCrystalBoss)
             {
+                clock.removeBoss(this.gameObject);
+                manager.updateScore();
+            }
 
+            if(isPlayerHealth)
+            {
+                Debug.Log("PlayerDeath");
+                manager.playerDeath();
             }
 
             if(!isDisableOnDeath)

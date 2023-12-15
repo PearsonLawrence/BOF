@@ -14,7 +14,7 @@ public class PhysicsJump : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>(); 
-        rb.gravityScale = fallGravityScale;
+        rb.gravityScale = gravityScale;
     }
 
     public void Jump(bool grounded)

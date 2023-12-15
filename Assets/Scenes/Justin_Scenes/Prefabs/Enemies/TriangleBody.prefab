@@ -396,7 +396,14 @@ MonoBehaviour:
   damageSFX: {fileID: 0}
   RBref: {fileID: 0}
   spawnRadius: 1.5
+  clock: {fileID: 0}
+  manager: {fileID: 0}
   FluxionPartPrefab: {fileID: 0}
+  isDisableOnDeath: 0
+  isCrystal: 0
+  isCrystalBoss: 0
+  isStarBoss: 0
+  crystal: {fileID: 0}
 --- !u!60 &7244875666199952163
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -482,8 +489,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 94c28cc72291f8045a96742702bb85e8, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

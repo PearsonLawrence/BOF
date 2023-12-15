@@ -22,6 +22,8 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        if (!Focus) return;
+
         toLocation = new Vector3(Focus.transform.position.x, Focus.transform.position.y + VertOffset, Focus.transform.position.z - ZOffset);
         transform.position = Vector3.Lerp(transform.position, toLocation, LagSpeed * Time.unscaledDeltaTime) ;
     }

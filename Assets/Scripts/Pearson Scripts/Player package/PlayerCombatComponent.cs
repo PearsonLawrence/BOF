@@ -112,7 +112,7 @@ public class PlayerCombatComponent : MonoBehaviour
         if (buffTime > 0)
         {
             buffTime -= Time.deltaTime;
-            buffText.text = "BuffTime: " + buffTime.ToString();
+            buffText.text = buffTime.ToString();
         }
         else
         {

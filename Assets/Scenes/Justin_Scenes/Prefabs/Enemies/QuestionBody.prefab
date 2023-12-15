@@ -5146,7 +5146,7 @@ MonoBehaviour:
   canTakeDamage: 1
   camShake: {fileID: 0}
   damageAnimator: {fileID: 4983485336610638296}
-  deathParticlePrefab: {fileID: 0}
+  deathParticlePrefab: {fileID: 5951003907412422077, guid: 48e9fbd5d78159c41ad1a372c5418744, type: 3}
   dropPrefab: {fileID: 7422460897329914409, guid: 0593febc73a89e246a3490339bdf9ea6, type: 3}
   isPlayerHealth: 0
   canDropPowerup: 1
@@ -5156,8 +5156,14 @@ MonoBehaviour:
   damageSFX: {fileID: 6628015449645671303}
   RBref: {fileID: 0}
   spawnRadius: 1.5
+  clock: {fileID: 0}
+  manager: {fileID: 0}
   FluxionPartPrefab: {fileID: 0}
   isDisableOnDeath: 0
+  isCrystal: 0
+  isCrystalBoss: 0
+  isStarBoss: 0
+  crystal: {fileID: 0}
 --- !u!82 &6628015449645671303
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5168,8 +5174,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 94c28cc72291f8045a96742702bb85e8, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

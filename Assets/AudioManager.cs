@@ -15,12 +15,15 @@ public enum SoundType
 
 public class AudioManager : MonoBehaviour
 {
-    [Header("Audio Source")] 
+    [Header("Audio Source")]
     [SerializeField] AudioSource musicSource;
+    [SerializeField] AudioSource musicSource2;
     [SerializeField] AudioSource SFXSource;
+    public StarBoss boss;
 
     [Header("Audio Clip")]
     public AudioClip background;
+    public AudioClip bossBackground;
     public AudioClip powerup;
     public AudioClip shoot;
     public AudioClip bossShoot;
@@ -28,38 +31,52 @@ public class AudioManager : MonoBehaviour
     public AudioClip playerMelee;
     public AudioClip enemyMelee;
 
+    public bool doBossFight;
+
+    public bool bossDead;
     //to add SFX
     //create AudioManager object
     //call PlaySFX with correct sound clip
     private void Start()
     {
-        musicSource.clip = background;
-        musicSource.Play();
     }
-
-    public void PlaySFX(SoundType type)
+    public void Update()
     {
-        
-        switch (type)
+        if (bossDead)
         {
-            case SoundType.takeDamage:
-                SFXSource.PlayOneShot(takeDamage);
-                break;
-            case SoundType.powerup:
-                SFXSource.PlayOneShot(powerup);
-                break;
-            case SoundType.playerMelee:
-                SFXSource.PlayOneShot(playerMelee);
-                break;
-            case SoundType.enemyMelee:
-                SFXSource.PlayOneShot(enemyMelee);
-                break;
-            case SoundType.shoot:
-                SFXSource.PlayOneShot(shoot);
-                break;
-            case SoundType.bossShoot:
-                SFXSource.PlayOneShot(bossShoot);
-                break;
+            if (musicSource.volume > .01f)
+                musicSource.volume -= Time.deltaTime * 2;
+
+            if (musicSource2.volume > .01f)
+                musicSource2.volume -= Time.deltaTime * 2;
+        }
+        else if (boss.isFighting)
+        {
+           
+                Debug.Log("Fighting");
+                musicSource.volume -= Time.deltaTime * .5f;
+                if (musicSource.volume < .2f && !musicSource2.isPlaying)
+                {
+                    musicSource2.PlayOneShot(bossBackground);
+                }
+
+                if (musicSource2.isPlaying && musicSource2.volume != 75)
+                {
+                    musicSource2.volume += Time.deltaTime * .5f;
+                }
+
+            
+           
+        }
+        else
+        {
+            Debug.Log("No Fight");
+            if (musicSource.isPlaying == false)
+            {
+                musicSource.PlayOneShot(background);
+
+            }
         }
     }
+   
 }

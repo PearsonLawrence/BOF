@@ -284,7 +284,14 @@ MonoBehaviour:
   damageSFX: {fileID: -8845200247007777183}
   RBref: {fileID: 2699452954505879872}
   spawnRadius: 1.5
+  clock: {fileID: 0}
+  manager: {fileID: 0}
   FluxionPartPrefab: {fileID: 0}
+  isDisableOnDeath: 0
+  isCrystal: 0
+  isCrystalBoss: 0
+  isStarBoss: 0
+  crystal: {fileID: 0}
 --- !u!50 &2699452954505879872
 Rigidbody2D:
   serializedVersion: 4
@@ -772,6 +779,7 @@ MonoBehaviour:
   isAttacking: 0
   isKnockback: 1
   isPlayer: 0
+  isExplodeOnPlayer: 0
   bulletType: 0
   impactPrefab: {fileID: 108591862957779564, guid: f66549528a8651143b91c5e00ae27961, type: 3}
 --- !u!1 &4834041483128955658

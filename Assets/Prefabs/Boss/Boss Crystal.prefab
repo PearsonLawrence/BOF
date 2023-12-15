@@ -157,7 +157,7 @@ MonoBehaviour:
   canTakeDamage: 1
   camShake: {fileID: 0}
   damageAnimator: {fileID: 680850912102713558}
-  deathParticlePrefab: {fileID: 0}
+  deathParticlePrefab: {fileID: 5951003907412422077, guid: 4a2adaca543d9c140be7d38bd8cc28d4, type: 3}
   dropPrefab: {fileID: 0}
   isPlayerHealth: 0
   canDropPowerup: 0
@@ -167,10 +167,12 @@ MonoBehaviour:
   damageSFX: {fileID: 0}
   RBref: {fileID: 0}
   spawnRadius: 1.5
+  clock: {fileID: 0}
+  manager: {fileID: 0}
   FluxionPartPrefab: {fileID: 0}
   isDisableOnDeath: 0
   isCrystal: 0
-  isCrystalBoss: 0
+  isCrystalBoss: 1
   crystal: {fileID: 0}
 --- !u!114 &1329031556110959330
 MonoBehaviour:

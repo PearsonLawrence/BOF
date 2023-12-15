@@ -19,6 +19,7 @@ public class StarBoss : MonoBehaviour
         moveRight = true;
         fBullets = GetComponent<FireBullets>();
         TP = GetComponent<StarTeleport>();
+        Camera.main.GetComponent<AudioManager>().boss = this;
     }
 
     public void InitiateBossFight()

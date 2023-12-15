@@ -225,6 +225,15 @@ MonoBehaviour:
   scoreValue: 5
   damageSFX: {fileID: 4899280391424066899}
   RBref: {fileID: 0}
+  spawnRadius: 1.5
+  clock: {fileID: 0}
+  manager: {fileID: 0}
+  FluxionPartPrefab: {fileID: 0}
+  isDisableOnDeath: 0
+  isCrystal: 0
+  isCrystalBoss: 0
+  isStarBoss: 0
+  crystal: {fileID: 0}
 --- !u!58 &8471421892699296351
 CircleCollider2D:
   m_ObjectHideFlags: 0

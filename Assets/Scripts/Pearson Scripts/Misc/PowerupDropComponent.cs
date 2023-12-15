@@ -24,7 +24,12 @@ public class PowerupDropComponent : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
 
-            if (sfx != null) Instantiate(sfx, transform.position, Quaternion.identity);
+            if (sfx != null)
+            {
+                GameObject tempSound = Instantiate(sfx, transform.position, Quaternion.identity);
+                Destroy(tempSound, 2);
+            }
+
             PlayerCombatComponent combat = collision.gameObject.GetComponent<PlayerInputController>().GetPlayerCombatComponent();
             if (combat == null) return;
 

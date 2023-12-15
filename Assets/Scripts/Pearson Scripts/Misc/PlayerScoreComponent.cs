@@ -6,12 +6,12 @@ using UnityEngine;
 public class PlayerScoreComponent : MonoBehaviour
 {
     [SerializeField] private TMP_Text score;
-    private int currentPlayerScore = 0;
+    public int currentPlayerScore = 0;
     
     public void increaseScore(int amount)
     {
         currentPlayerScore += amount;
-        score.text = "Score: " + currentPlayerScore;
+        score.text = currentPlayerScore.ToString();
 
     }
 }
