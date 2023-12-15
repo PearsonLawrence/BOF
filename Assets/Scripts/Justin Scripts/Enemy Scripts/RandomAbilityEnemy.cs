@@ -120,7 +120,13 @@ public class RandomAbilityEnemy : MonoBehaviour
     void CreateDuplicate()
     {
         GameObject duplicate = Instantiate(gameObject, transform.position, transform.rotation);
-        Destroy(duplicate.GetComponent<RandomAbilityEnemy>());
+        RandomAbilityEnemy ranAbil = duplicate.GetComponent<RandomAbilityEnemy>();
+        
+        if(ranAbil != null)
+        {
+            Destroy(ranAbil);
+        }
+        
         Destroy(duplicate, duplicateDuration);
 
         Vector2 directionToPlayer = (playerTransform.position - duplicate.transform.position).normalized;
