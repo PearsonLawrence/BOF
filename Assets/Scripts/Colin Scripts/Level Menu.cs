@@ -8,6 +8,7 @@ public class LevelMenu : MonoBehaviour
 
     public string nextGameScene;
     public string returnGameScene;
+    public string anotherGameScene;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,5 +29,10 @@ public class LevelMenu : MonoBehaviour
     public void ReturnLevel()
     {
         SceneManager.LoadScene(returnGameScene);
+    }
+
+    public void ChooseLevel()
+    {
+        SceneManager.LoadScene(anotherGameScene);
     }
 }

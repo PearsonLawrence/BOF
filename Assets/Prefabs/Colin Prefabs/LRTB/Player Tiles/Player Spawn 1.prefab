@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 6591774357265982758}
   - component: {fileID: 2447849809953884907}
   m_Layer: 9
-  m_Name: Room LRTBP
+  m_Name: Player Spawn 1
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -661,7 +661,7 @@ Transform:
   m_GameObject: {fileID: 4606406459846054920}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.63, y: -1.86, z: 0}
+  m_LocalPosition: {x: -2.5, y: -1.86, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -913,6 +913,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objects:
   - {fileID: 8328090808203031180, guid: 55e294b1809d3dc41aeb1b963420194d, type: 3}
+  - {fileID: 6968665228982661738, guid: 42518fff497813145a03b3939ea9da69, type: 3}
+  - {fileID: 4561680284650740548, guid: cc2302ce44c804f459ae9580241a5b26, type: 3}
 --- !u!1 &8016608368197404015
 GameObject:
   m_ObjectHideFlags: 0
@@ -939,7 +941,7 @@ Transform:
   m_GameObject: {fileID: 8016608368197404015}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.83, y: -2.6, z: 0}
+  m_LocalPosition: {x: 2.5, y: -2.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
