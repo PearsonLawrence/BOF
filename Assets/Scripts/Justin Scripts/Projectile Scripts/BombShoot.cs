@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class BombShoot : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     public GameObject projectilePrefab;
     public GameObject explosionPrefab;
     public Transform bombPos;
-    public float shootInterval = 2f;
-    public float projectileSpeed = 5f;
-    public float explosionDelay = 2f;
+    public float shootInterval = 7f;
+    public float projectileSpeed = 3f;
+    public float explosionDelay = 3f;
     public float explosionDuration = 1f;
+    public float projGravity = 5f;
 
     private GameObject player;
 
     void Start()
     {
-
         player = GameObject.FindGameObjectWithTag("Player");
 
         if(player == null)
@@ -39,7 +37,6 @@ public class BombShoot : MonoBehaviour
 
         void ShootProjectile()
         {
-            
             if (player == null)
             {
                 return;
@@ -48,21 +45,29 @@ public class BombShoot : MonoBehaviour
             Vector3 spawnPos = bombPos.TransformPoint(Vector3.zero);
             GameObject projectile = Instantiate(projectilePrefab, spawnPos, Quaternion.identity);
             Rigidbody2D projRb = projectile.GetComponent<Rigidbody2D>();
-
+            
             Vector2 directionToPlayer = (player.transform.position - transform.position).normalized;
+            float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x);
+            float arcAngle = angle + Mathf.Deg2Rad * 60f;
 
-            projRb.velocity = directionToPlayer * projectileSpeed;
+            // Apply an initial velocity
+            float speedX = Mathf.Cos(arcAngle) * projectileSpeed;
+            float speedY = Mathf.Sin(arcAngle) * projectileSpeed;
+            projRb.velocity = new Vector2(speedX, speedY);
+ 
+            projRb.gravityScale = projGravity;
 
             StartCoroutine(ExplodeAfterDelay(projectile));
+
         }
-            
+
         IEnumerator ExplodeAfterDelay(GameObject projectile)
         {
             yield return new WaitForSeconds(explosionDelay);
 
-            GameObject explosion = Instantiate(explosionPrefab, projectile.transform.position, Quaternion.identity);
+            GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 
-            Destroy(projectile);
+            Destroy(projectile); // Destroy the projectile
 
             StartCoroutine(MakeExplosionDisappear(explosion));
         }
@@ -74,9 +79,7 @@ public class BombShoot : MonoBehaviour
             Destroy(explosion);
         }
 
-        
+
     }
 
-    // Update is called once per frame
-    
 }

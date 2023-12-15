@@ -2985,7 +2985,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectsToDestroy: 4
-  barrier: {fileID: 0}
   hc: {fileID: 1964284472}
 --- !u!114 &1964284472 stripped
 MonoBehaviour:
@@ -3012,7 +3011,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3809720992906790947, guid: 72b7195b9787ea846b0abc665a91f0d6, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4691270997409161225, guid: 72b7195b9787ea846b0abc665a91f0d6, type: 3}
       propertyPath: m_LocalPosition.x

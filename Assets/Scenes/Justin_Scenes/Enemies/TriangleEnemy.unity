@@ -1029,6 +1029,7 @@ MonoBehaviour:
   projectileSpeed: 5
   explosionDelay: 2
   explosionDuration: 1
+  projGravity: 1
 --- !u!1 &1147477274
 GameObject:
   m_ObjectHideFlags: 0
@@ -1643,10 +1644,11 @@ MonoBehaviour:
   projectilePrefab: {fileID: 3284086141903323396, guid: fab1403e12ff3b2468fc4f4ea20f8982, type: 3}
   explosionPrefab: {fileID: 1590346799463799200, guid: 5f05de41d7b7bc345be0874fecbe7bc8, type: 3}
   bombPos: {fileID: 1735753059}
-  shootInterval: 2
+  shootInterval: 7
   projectileSpeed: 5
   explosionDelay: 2
   explosionDuration: 1
+  projGravity: 5
 --- !u!1 &1832799446
 GameObject:
   m_ObjectHideFlags: 0

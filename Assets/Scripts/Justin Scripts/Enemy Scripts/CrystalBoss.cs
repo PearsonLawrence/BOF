@@ -7,9 +7,6 @@ public class CrystalBoss : MonoBehaviour
     public int objectsToDestroy = 4;
     private int destroyedObjects = 0;
 
-    //public GameObject hands;
-    PolygonCollider2D bossCollider;
-    public BossBarrier barrier;
     public HealthComponent hc;
   
     // Start is called before the first frame update
@@ -39,8 +36,6 @@ public class CrystalBoss : MonoBehaviour
             EnableDamage();
         }
     }
-    
-    
     
     private void EnableDamage()
     {

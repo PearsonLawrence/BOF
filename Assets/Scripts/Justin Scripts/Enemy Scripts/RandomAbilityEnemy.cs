@@ -26,6 +26,8 @@ public class RandomAbilityEnemy : MonoBehaviour
     public float distanceBetween = 3f;
     private float distance;
     public GameObject player;
+    public float min = 0.5f;
+    public float max = 1f;
 
     private Transform playerTransform;
 
@@ -36,6 +38,9 @@ public class RandomAbilityEnemy : MonoBehaviour
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         InvokeRepeating("RandomAbility", 2f, 5f);
+
+        min = transform.position.x;
+        max = transform.position.x + 0.5f;
     }
 
     void Update()
@@ -50,6 +55,12 @@ public class RandomAbilityEnemy : MonoBehaviour
             transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
             transform.rotation = Quaternion.Euler(Vector3.forward * angle);
         }
+
+        if(distance > distanceBetween)
+        {
+            transform.position = new Vector3(Mathf.PingPong(Time.time * 2, max - min) + min, transform.position.y, transform.position.z);
+        }
+    
     }
 
     void RandomAbility()
@@ -57,7 +68,7 @@ public class RandomAbilityEnemy : MonoBehaviour
         int randomAbility = Random.Range(0, 3);
         Debug.Log("Case " + randomAbility);
 
-        switch (randomAbility)
+        switch (2)
         {
             case 0:
                 SwapWithPlayer();
@@ -119,24 +130,26 @@ public class RandomAbilityEnemy : MonoBehaviour
 
     void CreateDuplicate()
     {
-        GameObject duplicate = Instantiate(gameObject, transform.position, transform.rotation);
-        RandomAbilityEnemy ranAbil = duplicate.GetComponent<RandomAbilityEnemy>();
         
-        if(ranAbil != null)
+        GameObject duplicate = Instantiate(gameObject, transform.position, transform.rotation);
+        Debug.Log("Created duplicate");
+        duplicate.GetComponent<RandomAbilityEnemy>().enabled = false;
+        Destroy(duplicate, duplicateDuration);
+        
+
+        if (duplicate != null)
         {
-            Destroy(ranAbil);
+            Vector2 directionToPlayer = (playerTransform.position - duplicate.transform.position).normalized;
+            Vector2 stoppingPoint = (Vector2)playerTransform.position - directionToPlayer * duplicateStoppingDistance;
+            duplicate.transform.position = stoppingPoint;
+
+            Rigidbody2D duplicateRb = duplicate.GetComponent<Rigidbody2D>();
+            duplicateRb.velocity = (playerTransform.position - duplicate.transform.position).normalized;
+
+            StartCoroutine(ShootProjectiles(duplicate));
+
         }
         
-        Destroy(duplicate, duplicateDuration);
-
-        Vector2 directionToPlayer = (playerTransform.position - duplicate.transform.position).normalized;
-        Vector2 stoppingPoint = (Vector2)playerTransform.position - directionToPlayer * duplicateStoppingDistance;
-        duplicate.transform.position = stoppingPoint;
-        
-        Rigidbody2D duplicateRb = duplicate.GetComponent<Rigidbody2D>();
-        duplicateRb.velocity = (playerTransform.position - duplicate.transform.position).normalized;
-
-        StartCoroutine(ShootProjectiles(duplicate));
     }
 
     IEnumerator ShootProjectiles(GameObject shooter)
