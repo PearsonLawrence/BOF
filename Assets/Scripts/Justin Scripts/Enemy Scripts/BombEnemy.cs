@@ -13,7 +13,7 @@ public class BombEnemy : MonoBehaviour
     private Transform groundPosCheck;
     [SerializeField]
     private Transform wallPosCheck;
-    
+    [SerializeField] private BombShoot bomberShooter;
     public float groundCheckDistance;
     public float wallCheckDistance;
     [SerializeField]
@@ -25,6 +25,10 @@ public class BombEnemy : MonoBehaviour
     public float groundOffset;
     public float wallOffset;
     public float speed;
+
+    public SpriteRenderer body1, body2, body3;
+
+    [SerializeField] public Animator anim;
     
     private void Start()
     {
@@ -33,13 +37,29 @@ public class BombEnemy : MonoBehaviour
         direction = 1;
     }
 
-    private void Update()
-    {
-        
-    }
 
     private void FixedUpdate()
     {
+        if(bomberShooter.isActive == false)
+        {
+            if (rb.simulated == true)
+            {
+                rb.simulated = false;
+                body1.enabled = false;
+                body2.enabled = false;
+                body3.enabled = false;
+            }
+        }
+        else
+        {
+            if(rb.simulated == false)
+            {
+                rb.simulated = true;
+                body1.enabled = true;
+                body2.enabled = true;
+                body3.enabled = true;
+            }
+        }
         CheckGroundOrWall();
         Movement();
     }

@@ -54,9 +54,9 @@ public class FireBullets : MonoBehaviour
 
             GameObject bul = StarBulletPool.bulletPoolInstance.GetBullet();
             bul.transform.position = transform.position;
-            bul.transform.rotation = transform.rotation;
             bul.SetActive(true);
             bul.GetComponent<Rigidbody2D>().velocity = (bulDir * launchSpeed);
+            bul.transform.up = bulDir;
             bul.GetComponent<collisionDamageComponent>().owner = health;
             angle += angleStep;
         }

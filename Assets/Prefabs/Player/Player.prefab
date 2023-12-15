@@ -5536,6 +5536,7 @@ MonoBehaviour:
   RBref: {fileID: 5432907383064986436}
   spawnRadius: 1.5
   FluxionPartPrefab: {fileID: 7422460897329914409, guid: e7078929b5634f0479c95e3b3b3f77a1, type: 3}
+  isDisableOnDeath: 0
 --- !u!82 &3906830030543309643
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6030,12 +6031,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCombat: {fileID: 3215917752118631049}
   playerBulletPrefab: {fileID: 683138490325392874, guid: c93b357bc22e54f45a9ef098be05c566, type: 3}
-  maxBulletCollection: 5
+  maxBulletCollection: 10
   shieldBulletDamage: 10
   buffedShieldBulletDamage: 20
-  shieldDestroyDamageBase: 25
-  bulletLaunchVel: 6
-  bulletSizeModifier: 0.05
+  shieldDestroyDamageBase: 50
+  bulletLaunchVel: 7
+  bulletSizeModifier: 0.1
   ShieldDestroy: {fileID: 8916434780195807882}
   ShieldCooldown: 2
   ShieldDestroyCooldown: 4
@@ -6363,6 +6364,7 @@ MonoBehaviour:
   isAttacking: 0
   isKnockback: 0
   isPlayer: 0
+  isExplodeOnPlayer: 0
   bulletType: 0
   impactPrefab: {fileID: 0}
 --- !u!1 &2205879151528613981 stripped
@@ -6392,6 +6394,7 @@ MonoBehaviour:
   isAttacking: 0
   isKnockback: 0
   isPlayer: 0
+  isExplodeOnPlayer: 0
   bulletType: 0
   impactPrefab: {fileID: 0}
 --- !u!96 &2594804467702160226 stripped

@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class DestroyableObject : MonoBehaviour
 {
-    public System.Action onDestroy;
-
-    private void OnDestroy()
+    public CrystalBoss boss;
+        
+    public void doDestroy()
     {
-        if (onDestroy != null)
-        {
-            onDestroy();
-        }
-
+        boss.ObjectDestroyed();
     }
 }

@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7550918990169565230}
   - component: {fileID: 4337038442227094747}
   - component: {fileID: 3809720992906790947}
+  - component: {fileID: 5433652516811855945}
+  - component: {fileID: 8289029344221724447}
   m_Layer: 0
   m_Name: Crystal
   m_TagString: Untagged
@@ -27,14 +29,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 648550479177470342}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.63111913, w: 0.7756859}
-  m_LocalPosition: {x: -6.15, y: -3.11, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.2875, y: 3.0452, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6888673340375658471}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 78.265}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7550918990169565230
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -152,7 +154,7 @@ MonoBehaviour:
   currentHealth: 0
   canTakeDamage: 1
   camShake: {fileID: 0}
-  damageAnimator: {fileID: 0}
+  damageAnimator: {fileID: 5433652516811855945}
   deathParticlePrefab: {fileID: 0}
   dropPrefab: {fileID: 0}
   isPlayerHealth: 0
@@ -161,6 +163,47 @@ MonoBehaviour:
   hasScore: 0
   scoreValue: 0
   damageSFX: {fileID: 0}
+  RBref: {fileID: 0}
+  spawnRadius: 1.5
+  FluxionPartPrefab: {fileID: 0}
+  isDisableOnDeath: 1
+  isCrystal: 1
+  isCrystalBoss: 0
+  crystal: {fileID: 8289029344221724447}
+--- !u!95 &5433652516811855945
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648550479177470342}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 335981af0fb9a1644a56b4f8053cda49, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8289029344221724447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648550479177470342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cf564e13ea04a6469332813ca118a8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boss: {fileID: 0}
 --- !u!1 &6164107993224697833
 GameObject:
   m_ObjectHideFlags: 0

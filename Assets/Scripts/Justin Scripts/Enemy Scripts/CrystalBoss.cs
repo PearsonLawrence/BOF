@@ -6,27 +6,17 @@ public class CrystalBoss : MonoBehaviour
 {
     public int objectsToDestroy = 4;
     private int destroyedObjects = 0;
-
+    public List<GameObject> ObjectList;
     public HealthComponent hc;
   
     // Start is called before the first frame update
     void Start()
     {
         hc.canTakeDamage = false;
-        InitializeObjects();
     }
 
-    private void InitializeObjects()
-    {
-        DestroyableObject[] destroyableObjects = FindObjectsOfType<DestroyableObject>();
 
-        foreach(var obj in destroyableObjects)
-        {
-            obj.onDestroy += ObjectDestroyed;
-        }
-    }
-
-    private void ObjectDestroyed()
+    public void ObjectDestroyed()
     {
         destroyedObjects++;
         Debug.Log("Destroyed Objects: " + destroyedObjects);

@@ -19,7 +19,7 @@ public class HealthComponent : MonoBehaviour
     [SerializeField] private GameObject dropPrefab;
 
     [SerializeField] private bool isPlayerHealth;
-    [SerializeField] private bool canDropPowerup;
+    public bool canDropPowerup;
 
 
     [SerializeField] private Image healthBar;
@@ -35,6 +35,11 @@ public class HealthComponent : MonoBehaviour
     private PlayerScoreComponent score;
 
     [SerializeField] private GameObject FluxionPartPrefab;
+
+    public bool isDisableOnDeath;
+    public bool isCrystal;
+    public bool isCrystalBoss;
+    public DestroyableObject crystal;
     public void Start()
     {
         currentHealth = maxHealth;
@@ -57,6 +62,7 @@ public class HealthComponent : MonoBehaviour
     public void DoHeal(float amount)
     {
         currentHealth += amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         if (isPlayerHealth && healthBar != null)
         {
             healthBar.fillAmount = currentHealth / maxHealth;
@@ -128,7 +134,28 @@ public class HealthComponent : MonoBehaviour
                 ShakeType type = (isPlayerHealth) ? ShakeType.playerDeath : ShakeType.enemyDeath;
                 camShake.doShake(type);
             }
-            Destroy(this.gameObject);
+
+
+            if(isCrystalBoss)
+            {
+
+            }
+
+            if(!isDisableOnDeath)
+                Destroy(this.gameObject);
+            else
+            {
+                if(isCrystal)
+                {
+                    crystal.doDestroy();
+                }
+                else
+                    currentHealth = maxHealth;
+
+
+                this.gameObject.SetActive(false);
+
+            }
         }
     }
 

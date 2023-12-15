@@ -969,67 +969,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &955531488
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 955531489}
-  m_Layer: 0
-  m_Name: BombSpawn
-  m_TagString: Untagged
-  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &955531489
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 955531488}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.02, y: 0.8, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1045309837}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1045309833 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8098060944453426161, guid: 3c25bdf1f4b8cd14794409562fc28837, type: 3}
-  m_PrefabInstance: {fileID: 8556057583099469441}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1045309837 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1510472658555799720, guid: 3c25bdf1f4b8cd14794409562fc28837, type: 3}
-  m_PrefabInstance: {fileID: 8556057583099469441}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1045309840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1045309833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08cff906f6cd5e0408888b16e0ba0894, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 3284086141903323396, guid: fab1403e12ff3b2468fc4f4ea20f8982, type: 3}
-  explosionPrefab: {fileID: 1590346799463799200, guid: 5f05de41d7b7bc345be0874fecbe7bc8, type: 3}
-  bombPos: {fileID: 955531489}
-  shootInterval: 7
-  projectileSpeed: 7
-  explosionDelay: 2
-  explosionDuration: 1
-  projGravity: 3
 --- !u!1 &1147477274
 GameObject:
   m_ObjectHideFlags: 0
@@ -2064,24 +2003,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Triangle
       objectReference: {fileID: 0}
-    - target: {fileID: 9213091280670868271, guid: 3c25bdf1f4b8cd14794409562fc28837, type: 3}
-      propertyPath: speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9213091280670868271, guid: 3c25bdf1f4b8cd14794409562fc28837, type: 3}
-      propertyPath: zAxisAngle
-      value: 45
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 1510472658555799720, guid: 3c25bdf1f4b8cd14794409562fc28837, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 955531489}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8098060944453426161, guid: 3c25bdf1f4b8cd14794409562fc28837, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1045309840}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c25bdf1f4b8cd14794409562fc28837, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

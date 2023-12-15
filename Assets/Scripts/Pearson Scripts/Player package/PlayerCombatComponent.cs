@@ -22,7 +22,7 @@ public class PlayerCombatComponent : MonoBehaviour
     [SerializeField] private Color colorshield, colorshield2;
     public float buffTime;
 
-    private EnemyType currentPowerupType;
+    [SerializeField] private EnemyType currentPowerupType;
     public TMP_Text buffText;
 
     public void SetCurrentPowerupType(EnemyType type)
@@ -143,16 +143,24 @@ public class PlayerCombatComponent : MonoBehaviour
         }
         else
         {
-            doPowerUp(currentPowerupType);
+            doPowerUp();
         }
 
         isMoving = (player.Horz != 0);
         anim.SetBool("isMoving", isMoving);
         
     }
-    public void doPowerUp(EnemyType type)
+    public void doPowerUp()
     {
-        switch (type)
+        if(currentPowerupType == EnemyType.Question)
+        {
+            int tempRand = Random.Range(0, 30);
+            currentPowerupType = (tempRand <= 10) ? EnemyType.Circle : (tempRand <= 20) ? EnemyType.Square : EnemyType.Triangle;
+            
+        }
+            
+            
+        switch (currentPowerupType)
         {
             case EnemyType.Circle:
                 Hand1.currentDamage = Hand1.buffedDamage;
@@ -206,11 +214,6 @@ public class PlayerCombatComponent : MonoBehaviour
                 trail2.endColor = Color.cyan;
                 trail3.endColor = Color.blue;
                 trail4.endColor = Color.blue;
-                break;
-            case EnemyType.Question:
-                int tempRand = Random.Range(0, 3);
-                EnemyType newType = (tempRand == 0) ? EnemyType.Circle : (tempRand == 1) ? EnemyType.Square : EnemyType.Triangle;
-                doPowerUp(newType);
                 break;
         }
     }

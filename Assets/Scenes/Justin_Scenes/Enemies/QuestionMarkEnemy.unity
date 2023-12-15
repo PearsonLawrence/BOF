@@ -1173,25 +1173,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6639667720405339883, guid: 2b88eb7a3fea1564ebc0bfe595a5a46a, type: 3}
-      propertyPath: max
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6639667720405339883, guid: 2b88eb7a3fea1564ebc0bfe595a5a46a, type: 3}
-      propertyPath: min
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6639667720405339883, guid: 2b88eb7a3fea1564ebc0bfe595a5a46a, type: 3}
-      propertyPath: speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6639667720405339883, guid: 2b88eb7a3fea1564ebc0bfe595a5a46a, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 972677933}
-    - target: {fileID: 6639667720405339883, guid: 2b88eb7a3fea1564ebc0bfe595a5a46a, type: 3}
-      propertyPath: distanceBetween
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 7830964381024543463, guid: 2b88eb7a3fea1564ebc0bfe595a5a46a, type: 3}
       propertyPath: m_Name
       value: questionmark

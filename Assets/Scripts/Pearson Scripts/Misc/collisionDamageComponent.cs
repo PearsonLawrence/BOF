@@ -12,6 +12,7 @@ public class collisionDamageComponent : MonoBehaviour
     public bool isAttacking;
     public bool isKnockback;
     [SerializeField] bool isPlayer;
+    [SerializeField] bool isExplodeOnPlayer;
     [SerializeField] EnemyType bulletType;
     [SerializeField] private GameObject impactPrefab;
     public void OnTriggerEnter2D(Collider2D collision)
@@ -28,10 +29,12 @@ public class collisionDamageComponent : MonoBehaviour
         PlayerShieldComponent shield = collision.gameObject.GetComponent<PlayerShieldComponent>();
         if (hc)
         {
+            Debug.Log("HC");
+            Debug.Log(hc.name);
             if (hc != owner)
             {
                 hc.takeDamage(currentDamage);
-
+                Debug.Log("Damage");
             }
             if (isKnockback)
             {
@@ -48,12 +51,18 @@ public class collisionDamageComponent : MonoBehaviour
             shield.addBulletToCollection();
 
        
-        if (impactPrefab)
+        if (impactPrefab && !isExplodeOnPlayer)
         {
             GameObject temp = Instantiate(impactPrefab, transform.position, Quaternion.identity);
             temp.transform.forward = -transform.up;
             Destroy(temp, 1);
         }
+        else if(impactPrefab && isExplodeOnPlayer && collision.tag == "Player")
+        {
+            GameObject temp = Instantiate(impactPrefab, transform.position, Quaternion.identity);
+            Destroy(temp, 1);
+        }
+
         if (isDestroyedOnHit && owner)
         {
             if (owner.gameObject.CompareTag("Boss"))
@@ -63,35 +72,6 @@ public class collisionDamageComponent : MonoBehaviour
         }
         else if(isDestroyedOnHit)
             Destroy(this.gameObject);
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //if (!owner) return;
-        //if (!isAttacking || owner.gameObject == collision.gameObject || collision.gameObject.CompareTag("Bullet")) return;
-
-        //HealthComponent hc = collision.gameObject.GetComponent<HealthComponent>();
-        //if (hc)
-        //{
-        //    if (hc != owner)
-        //    {
-        //        hc.takeDamage(currentDamage);
-        //    }
-        //}
-
-        //if (isDestroyedOnHit && owner)
-        //{
-        //    if (owner.gameObject.CompareTag("Boss"))
-        //    {
-
-        //        this.gameObject.SetActive(false);
-        //    }
-        //    else
-        //    {
-        //        Destroy(this.gameObject);
-        //    }
-        //}
-        //else if (isDestroyedOnHit)
-        //    Destroy(this.gameObject);
     }
 
 
