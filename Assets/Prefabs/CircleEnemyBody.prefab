@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 4899280391424066899}
   m_Layer: 0
   m_Name: CircleEnemyBody
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -224,6 +224,7 @@ MonoBehaviour:
   hasScore: 1
   scoreValue: 5
   damageSFX: {fileID: 4899280391424066899}
+  RBref: {fileID: 0}
 --- !u!58 &8471421892699296351
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -298,18 +299,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 493855069eb8e5a448b8f85d75d0f7ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 2
   chase: 1
   startingPoint: {fileID: 0}
-  stoppingDistance: 2
-  stopChase: 5
+  stoppingDistance: 2.5
+  stopChase: 8
   Player: {fileID: 0}
   circularMotionRadius: 3
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 256
   avoidanceDistance: 2
+  ActiveDistance: 15
   HC: {fileID: 0}
+  renderItem1: {fileID: 6670180013192394350}
+  renderItem2: {fileID: 1351309405764694056}
+  shootComp: {fileID: 3381519161815978990}
 --- !u!114 &3381519161815978990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,11 +329,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 683138490325392874, guid: 0c642616a236f80408a20e6be9c33983, type: 3}
   projectilePos: {fileID: 7630394682125572205}
-  shootForce: 5
-  mainBodyTank: {fileID: 0}
+  shootForce: 6
+  mainBody: {fileID: 0}
   enemyPlayer: {fileID: 0}
   enemyType: 0
-  distanceToShoot: 10
+  distanceToShoot: 8
+  isActive: 0
 --- !u!82 &4899280391424066899
 AudioSource:
   m_ObjectHideFlags: 0

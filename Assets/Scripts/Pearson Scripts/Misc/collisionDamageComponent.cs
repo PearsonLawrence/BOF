@@ -13,11 +13,16 @@ public class collisionDamageComponent : MonoBehaviour
     public bool isKnockback;
     [SerializeField] bool isPlayer;
     [SerializeField] EnemyType bulletType;
+    [SerializeField] private GameObject impactPrefab;
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (!owner) return;
         string tag = collision.gameObject.tag;
+
+
         if (!isAttacking || owner.gameObject == collision.gameObject || tag == "Bullet" || tag == "PlayerHand") return;
+
+        if (isPlayer && tag == "PlayerHand" || isPlayer && tag == "Shield" || isPlayer && tag == "Player" || isPlayer && tag == "Bullet") return;
 
         HealthComponent hc = collision.gameObject.GetComponent<HealthComponent>();
         PlayerShieldComponent shield = collision.gameObject.GetComponent<PlayerShieldComponent>();
@@ -26,20 +31,29 @@ public class collisionDamageComponent : MonoBehaviour
             if (hc != owner)
             {
                 hc.takeDamage(currentDamage);
-                if(isKnockback)
+
+            }
+            if (isKnockback)
+            {
+                Rigidbody2D tempRB = hc.getRBRef();
+                if (tempRB != null)
                 {
-                    Rigidbody2D tempRB = collision.GetComponent<Rigidbody2D>();
-                    if(tempRB != null)
-                    {
-                        Vector2 knockbackDirection = (collision.transform.position - transform.position).normalized;
-                        tempRB.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
-                    }
+                    Vector2 knockbackDirection = (collision.transform.position - transform.position).normalized;
+                    tempRB.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
                 }
             }
         }
-        else if (shield)
-            shield.addBulletToCollection(bulletType);
-        
+
+        if (shield)
+            shield.addBulletToCollection();
+
+       
+        if (impactPrefab)
+        {
+            GameObject temp = Instantiate(impactPrefab, transform.position, Quaternion.identity);
+            temp.transform.forward = -transform.up;
+            Destroy(temp, 1);
+        }
         if (isDestroyedOnHit && owner)
         {
             if (owner.gameObject.CompareTag("Boss"))
@@ -52,32 +66,32 @@ public class collisionDamageComponent : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!owner) return;
-        if (!isAttacking || owner.gameObject == collision.gameObject || collision.gameObject.CompareTag("Bullet")) return;
+        //if (!owner) return;
+        //if (!isAttacking || owner.gameObject == collision.gameObject || collision.gameObject.CompareTag("Bullet")) return;
 
-        HealthComponent hc = collision.gameObject.GetComponent<HealthComponent>();
-        if (hc)
-        {
-            if (hc != owner)
-            {
-                hc.takeDamage(currentDamage);
-            }
-        }
+        //HealthComponent hc = collision.gameObject.GetComponent<HealthComponent>();
+        //if (hc)
+        //{
+        //    if (hc != owner)
+        //    {
+        //        hc.takeDamage(currentDamage);
+        //    }
+        //}
 
-        if (isDestroyedOnHit && owner)
-        {
-            if (owner.gameObject.CompareTag("Boss"))
-            {
+        //if (isDestroyedOnHit && owner)
+        //{
+        //    if (owner.gameObject.CompareTag("Boss"))
+        //    {
 
-                this.gameObject.SetActive(false);
-            }
-            else
-            {
-                Destroy(this.gameObject);
-            }
-        }
-        else if (isDestroyedOnHit)
-            Destroy(this.gameObject);
+        //        this.gameObject.SetActive(false);
+        //    }
+        //    else
+        //    {
+        //        Destroy(this.gameObject);
+        //    }
+        //}
+        //else if (isDestroyedOnHit)
+        //    Destroy(this.gameObject);
     }
 
 

@@ -8,13 +8,16 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Justin_Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Colin Scenes/Title Screen.unity
     guid: 1e40248dc99e8704886baaf788fa8782
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Pearson Scenes/RandomLevel.unity
     guid: dccf7043a58d73e488060ddfc61838eb
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Colin Scenes/Level Select.unity
     guid: b62df81575afb4147bcc6371a81be82e
+  - enabled: 1
+    path: Assets/Scenes/Pearson Scenes/RandomLevel_Testing.unity
+    guid: e2f2c604b7ea69e4fa192b02e59925b2
   m_configObjects: {}

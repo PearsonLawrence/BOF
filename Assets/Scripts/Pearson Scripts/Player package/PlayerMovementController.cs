@@ -164,10 +164,6 @@ public class PlayerMovementController : MonoBehaviour
                 break;
         }
     }
-    public void Update()
-    {
-        
-    }
 
     // Update is called once per frame
     void FixedUpdate()
@@ -183,7 +179,7 @@ public class PlayerMovementController : MonoBehaviour
         }
         else if(!isCrouching && transform.localScale == new Vector3(.5f, .25f, 1))
         {
-            transform.localScale = new Vector3(.5f, .5f, 1);
+            transform.localScale = new Vector3(.5f, .45f, 1);
         }
 
 

@@ -14,9 +14,10 @@ public class TankEnemy : MonoBehaviour
     public Transform groundDetection2;
     [SerializeField] private Animator anim;
     [SerializeField] private HealthComponent HC;
+    [SerializeField] private SpriteRenderer renderItem1, renderItem2, renderItem3;
     public Rigidbody2D rb;
     public GameObject Player;
-
+    public float ActiveDistance = 30;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -38,6 +39,28 @@ public class TankEnemy : MonoBehaviour
 
     void Update() // add wall detection after alpha
     {
+        float distanceToPlayer = Vector2.Distance(transform.position, Player.transform.position);
+
+        if (distanceToPlayer >= ActiveDistance)
+        {
+            rb.simulated = false;
+            renderItem1.enabled = false;
+            renderItem2.enabled = false;
+            renderItem3.enabled = false;
+            return;
+        }
+        else
+        {
+            if(!rb.simulated)
+            {
+                renderItem1.enabled = true;
+                renderItem2.enabled = true;
+                renderItem3.enabled = true;
+                rb.simulated = true;
+
+            }
+        }
+
         rb.velocity = new Vector2(dir.x * speed * Time.deltaTime, rb.velocity.y);
 
         RaycastHit2D groundInfoRight = Physics2D.Raycast(groundDetection.position, Vector2.down, RayDist);
@@ -81,7 +104,6 @@ public class TankEnemy : MonoBehaviour
 
             // Apply force to the player
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
-            Debug.Log("Player knocked back!");
         }
     }
 

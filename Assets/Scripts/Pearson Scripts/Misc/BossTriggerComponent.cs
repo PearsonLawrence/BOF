@@ -8,7 +8,6 @@ public class BossTriggerComponent : MonoBehaviour
     [SerializeField] Collider2D col;
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.tag);
         if (!collision.gameObject.CompareTag("Player")) return;
 
         boss.InitiateBossFight();

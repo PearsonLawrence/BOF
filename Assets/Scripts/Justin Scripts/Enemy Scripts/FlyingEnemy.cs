@@ -14,7 +14,11 @@ public class FlyingEnemy : MonoBehaviour
     private float circularMotionAngle = 0f;
     public LayerMask obstacleLayer;
     public float avoidanceDistance = 1f;
+    public float ActiveDistance = 30;
     [SerializeField] private HealthComponent HC;
+    [SerializeField] private SpriteRenderer renderItem1, renderItem2;
+    [SerializeField] private EnemyShoot shootComp;
+
 
     Ray ray;
     
@@ -33,6 +37,27 @@ public class FlyingEnemy : MonoBehaviour
         if (Player == null)
             return;
         float distanceToPlayer = Vector2.Distance(transform.position, Player.transform.position);
+
+        if (distanceToPlayer >= ActiveDistance)
+        {
+
+            if (shootComp.isActive == true)
+            {
+                shootComp.isActive = false;
+                renderItem1.enabled = false;
+                renderItem2.enabled = false;
+            }
+            return;
+        }
+        else
+        {
+            if(shootComp.isActive == false)
+            {
+                shootComp.isActive = true;
+                renderItem1.enabled = true;
+                renderItem2.enabled = true;
+            }
+        }
 
         if(distanceToPlayer >= stoppingDistance && distanceToPlayer <= stopChase)
         {
@@ -64,17 +89,13 @@ public class FlyingEnemy : MonoBehaviour
     }
     private void Chase()
     {
+        Vector3 rayDir = Player.transform.position - transform.position;
 
-        
+        RaycastHit2D PlayerAimRay = Physics2D.Raycast(transform.position, rayDir, avoidanceDistance, obstacleLayer);
 
-        transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, speed * Time.deltaTime);
-            
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, avoidanceDistance, obstacleLayer);
-            if (hit.collider != null)
-            {
-                // Avoid obstacle by changing direction (turn 90 degrees)
-                transform.Rotate(Vector3.forward, 90f);
-            }
+
+        if(!PlayerAimRay)
+            transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, speed * Time.deltaTime);
     }
 
     private void ReturnToStartPoint()

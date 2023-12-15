@@ -171,6 +171,9 @@ MonoBehaviour:
   isDestroyedOnHit: 1
   isAttacking: 1
   isKnockback: 1
+  isPlayer: 0
+  bulletType: 0
+  impactPrefab: {fileID: 108591862957779564, guid: dceaa07e15591b44baa43c05749b9a4c, type: 3}
 --- !u!82 &7753641754289502933
 AudioSource:
   m_ObjectHideFlags: 0

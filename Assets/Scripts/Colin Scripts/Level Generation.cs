@@ -134,7 +134,6 @@ public class LevelGeneration : MonoBehaviour
             {
                 if(!isFinalRoomCreated)
                 {
-                    Debug.Log("LOOOK HERE !!!!!!!!!!!!!!!!!!!!");
                     Transform tempPos = CurrentRoom.transform;
                     Destroy(CurrentRoom.gameObject);
                     GameObject tempRoom4 = Instantiate(rooms[5], tempPos.position, Quaternion.identity);

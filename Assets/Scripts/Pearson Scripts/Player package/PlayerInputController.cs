@@ -49,10 +49,16 @@ public class PlayerInputController : MonoBehaviour
             HandleTimeControl();
             HandleJumpInput();
 
+            if (Input.GetMouseButton(1))
+                playerCombat.doBlock();
+            else
+                playerCombat.endBlock();
+
             if (Input.GetMouseButtonDown(0))
             {
-                playerCombat.doAttack();
+                    playerCombat.doAttack();
             }
+
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 pauseMenu.Pause();

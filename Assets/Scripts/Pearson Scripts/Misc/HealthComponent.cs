@@ -30,7 +30,11 @@ public class HealthComponent : MonoBehaviour
 
     [SerializeField] private AudioSource damageSFX;
 
+    [SerializeField] private Rigidbody2D RBref;
+    public float spawnRadius = 1.5f;
     private PlayerScoreComponent score;
+
+    [SerializeField] private GameObject FluxionPartPrefab;
     public void Start()
     {
         currentHealth = maxHealth;
@@ -41,12 +45,23 @@ public class HealthComponent : MonoBehaviour
         }
 
     }
+    public Rigidbody2D getRBRef()
+    {
+        return RBref;
+    }
 
     public void setDamageAnimator(Animator animator)
     {
         damageAnimator = animator;
     }
-
+    public void DoHeal(float amount)
+    {
+        currentHealth += amount;
+        if (isPlayerHealth && healthBar != null)
+        {
+            healthBar.fillAmount = currentHealth / maxHealth;
+        }
+    }
     public void EndDamageAnimation()
     {
         
@@ -74,8 +89,24 @@ public class HealthComponent : MonoBehaviour
         if(isPlayerHealth && healthBar != null)
         {
             healthBar.fillAmount = currentHealth / maxHealth;
+            int rand = Random.Range(1, 100);
+           
+            if (dropPrefab != null && rand > 30)
+            {
+                float radius = spawnRadius;
+                Vector3 randomPos = Random.onUnitSphere * radius;
+                randomPos += transform.position;
+                randomPos.z = 0f;
 
-            if(dropPrefab != null) Instantiate(dropPrefab, transform.position, Quaternion.identity);
+                Vector3 direction = randomPos - transform.position;
+
+                GameObject temp = Instantiate(dropPrefab, randomPos, Quaternion.identity);
+
+                Rigidbody2D tempRB = temp.GetComponent<Rigidbody2D>();
+                
+                tempRB.velocity = direction * Random.Range(5,10);
+                temp.transform.up = direction;
+            }
         }
         if(currentHealth <= 0 )
         {

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1769181830884740618}
   - component: {fileID: 7939794449564567656}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6987896355787907511}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MeleeComponent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,9 +134,9 @@ GameObject:
   - component: {fileID: 6299460861851450443}
   - component: {fileID: 4616340448514765398}
   - component: {fileID: -8845200247007777183}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SquareEnemyBody
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -282,6 +282,9 @@ MonoBehaviour:
   hasScore: 1
   scoreValue: 10
   damageSFX: {fileID: -8845200247007777183}
+  RBref: {fileID: 2699452954505879872}
+  spawnRadius: 1.5
+  FluxionPartPrefab: {fileID: 0}
 --- !u!50 &2699452954505879872
 Rigidbody2D:
   serializedVersion: 4
@@ -348,8 +351,12 @@ MonoBehaviour:
   groundDetection2: {fileID: 3429142001582460464}
   anim: {fileID: 0}
   HC: {fileID: 0}
+  renderItem1: {fileID: 7939794449564567656}
+  renderItem2: {fileID: 8069326844445129438}
+  renderItem3: {fileID: 6394178050785412175}
   rb: {fileID: 0}
   Player: {fileID: 0}
+  ActiveDistance: 15
   RayDist: 0.1
   dir: {x: 1, y: 0}
 --- !u!114 &4616340448514765398
@@ -476,7 +483,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6392094218086146504}
   - component: {fileID: 7427489514780318147}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -623,7 +630,7 @@ GameObject:
   - component: {fileID: 6394178050785412175}
   - component: {fileID: 6123932058679639784}
   - component: {fileID: 6222458813105203238}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ProjectilePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -764,6 +771,9 @@ MonoBehaviour:
   isDestroyedOnHit: 0
   isAttacking: 0
   isKnockback: 1
+  isPlayer: 0
+  bulletType: 0
+  impactPrefab: {fileID: 108591862957779564, guid: f66549528a8651143b91c5e00ae27961, type: 3}
 --- !u!1 &4834041483128955658
 GameObject:
   m_ObjectHideFlags: 0
@@ -773,7 +783,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 644250769652482576}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RightCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -805,7 +815,7 @@ GameObject:
   m_Component:
   - component: {fileID: 776680586815578776}
   - component: {fileID: 8069326844445129438}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -888,7 +898,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3429142001582460464}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LeftCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
