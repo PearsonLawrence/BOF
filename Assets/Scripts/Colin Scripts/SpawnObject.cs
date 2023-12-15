@@ -8,6 +8,9 @@ public class SpawnObject : MonoBehaviour
     void Start()
     {
         int rand = Random.Range(0, objects.Length);
+
+        if (!objects[rand]) return;
+
         GameObject instance = (GameObject)Instantiate(objects[rand], transform.position, Quaternion.identity);
         instance.transform.parent = transform;
     }
